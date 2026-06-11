@@ -31,7 +31,7 @@
 
         listEl.innerHTML = filtered
           .map(item => `
-            <li><a href="job-detail.html?id=${item.id}">${item.title}</a></li>
+            <li><a href="jobs/${item.id}.html">${item.title}</a></li>
           `)
           .join("");
       });

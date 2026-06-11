@@ -65,7 +65,7 @@ function initTicker() {
     .map(text => {
       // Look up if any announcement matches a current job for easy navigation
       const linkedJob = window.portalData.items.find(item => text.includes(item.shortTitle));
-      const url = linkedJob ? `job-detail.html?id=${linkedJob.id}` : "#";
+      const url = linkedJob ? `jobs/${linkedJob.id}.html` : "#";
       return `<a href="${url}" class="ticker-item">${text}</a>`;
     })
     .join("");
@@ -156,7 +156,7 @@ function populateGrid(elementId, itemsList) {
       // Highlight trending/hot jobs with a badge
       const showBadge = item.isTrending ? '<span class="badge-new">New</span>' : '';
       return `
-        <a href="job-detail.html?id=${item.id}" class="grid-item-link">
+        <a href="jobs/${item.id}.html" class="grid-item-link">
           <span class="grid-item-left">
             ${showBadge}
             ${item.shortTitle} Online Form 2026
@@ -187,7 +187,7 @@ function initSlider() {
         <div class="slide-tag">Trending Vacancy</div>
         <h3 class="slide-title">${job.title}</h3>
         <p class="slide-desc">${job.department} • Total Vacancies: ${job.totalVacancies} • Last Date: ${formatDate(job.lastDate)}</p>
-        <a href="job-detail.html?id=${job.id}" class="btn btn-primary" style="width: fit-content; padding: 8px 18px; font-size: 13px;">View Complete Details</a>
+        <a href="jobs/${job.id}.html" class="btn btn-primary" style="width: fit-content; padding: 8px 18px; font-size: 13px;">View Complete Details</a>
       </div>
     `).join("");
 
@@ -263,7 +263,7 @@ function initSearch() {
     let html = "";
     matchedItems.forEach(item => {
       html += `
-        <div class="suggestion-item" data-url="job-detail.html?id=${item.id}">
+        <div class="suggestion-item" data-url="jobs/${item.id}.html">
           <span class="suggestion-title">${item.title}</span>
           <span class="suggestion-cat">${item.category}</span>
         </div>

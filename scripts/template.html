@@ -4,27 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Fallback/Default SEO Meta Tags (Overwritten by JS based on Job ID) -->
-  <title>Job Details - Sarkari Result Portal</title>
-  <meta name="description" content="View application details, age limits, syllabus, total vacancies, application fee and online application direct links for latest government recruitment.">
-  <meta name="keywords" content="government jobs 2026, sarkari result, admit card, syllabus, online form">
+  <!-- SEO Meta Tags -->
+  <title>{{TITLE}} - Sarkari Result</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <meta name="keywords" content="{{META_KEYWORDS}}">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Job Application Details - Sarkari Result">
-  <meta property="og:description" content="View application eligibility, dates, and official links.">
+  <meta property="og:title" content="{{TITLE}} - Sarkari Result">
+  <meta property="og:description" content="{{META_DESCRIPTION}}">
   
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💼</text></svg>">
   
-  <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Core Stylesheet (relative to /jobs/ directory) -->
+  <link rel="stylesheet" href="../assets/css/style.css">
 
   <!-- Local Database & JS Logic -->
-  <script defer src="assets/js/data.js"></script>
-  <script defer src="assets/js/main.js"></script>
+  <script defer src="../assets/js/data.js"></script>
+  <script defer src="../assets/js/main.js"></script>
+
   <!-- Adsterra Popunder Script -->
   <script src="https://pl29711176.effectivecpmnetwork.com/b0/f3/f5/b0f3f5968c152f68ae62c805498f62b0.js"></script>
+
+  <!-- Dynamically Compiled JSON-LD Schemas -->
+  {{JSON_LD_SCHEMA}}
 </head>
 <body>
 
@@ -39,7 +43,7 @@
   <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">
+      <a href="../index.html" class="logo">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="24" height="24" rx="6" fill="url(#logoGrad)"/>
           <path d="M12 7V17M7 12H17" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
@@ -55,13 +59,13 @@
 
       <!-- Menu -->
       <nav class="nav-menu" id="navMenu">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="index.html#latest-jobs" class="nav-link">Latest Jobs</a>
-        <a href="index.html#admit-card" class="nav-link">Admit Card</a>
-        <a href="index.html#result" class="nav-link">Results</a>
-        <a href="yojana.html" class="nav-link">Sarkari Yojana</a>
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#latest-jobs" class="nav-link">Latest Jobs</a>
+        <a href="../index.html#admit-card" class="nav-link">Admit Card</a>
+        <a href="../index.html#result" class="nav-link">Results</a>
+        <a href="../yojana.html" class="nav-link">Sarkari Yojana</a>
+        <a href="../about.html" class="nav-link">About Us</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
       </nav>
 
       <!-- Theme Switcher -->
@@ -76,29 +80,39 @@
   </header>
 
   <main class="container">
-    <div class="detail-layout" id="detailMainContent">
+    <div class="detail-layout">
       
       <!-- Left: Job Details Panel -->
       <section class="detail-main">
+        
+        <!-- Introduction Header -->
         <div class="detail-header">
-          <div class="detail-dept" id="detailDept">DEPARTMENT NAME</div>
-          <h1 class="detail-title" id="detailTitle">Job Title Recruitment Online Form 2026</h1>
+          <div class="detail-dept">{{DEPT}}</div>
+          <h1 class="detail-title">{{TITLE}}</h1>
           
           <div class="detail-meta-grid">
             <div class="detail-meta-item">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-              <span>Post Date: <strong id="detailPostDate">--/--/--</strong></span>
+              <span>Post Date: <strong>{{POST_DATE}}</strong></span>
             </div>
             <div class="detail-meta-item">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>Last Date to Apply: <strong id="detailLastDate">--/--/--</strong></span>
+              <span>Last Date to Apply: <strong>{{LAST_DATE}}</strong></span>
             </div>
             <div class="detail-meta-item">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              <span>Total Vacancy: <strong id="detailVacancies">--</strong></span>
+              <span>Total Vacancy: <strong>{{VACANCIES}}</strong></span>
             </div>
           </div>
         </div>
+
+        <!-- Section 1: Introduction (100-150 words) -->
+        <section style="margin: 20px 0;">
+          <h2 style="font-size: 18px; margin-bottom: 10px; border-left: 4px solid var(--primary); padding-left: 8px;">1. Introduction</h2>
+          <p style="font-size: 14.5px; line-height: 1.7; color: var(--text-secondary);">
+            {{INTRODUCTION}}
+          </p>
+        </section>
 
         <!-- Adsterra Banner Ad Unit -->
         <div style="margin: 20px auto; text-align: center; max-width: 728px; width: 100%; overflow: hidden;">
@@ -106,89 +120,116 @@
           <div id="container-ea20c287172f6589f42c38865a27a0d4"></div>
         </div>
 
-        <!-- Details Information Grid (Sarkari Result Table style modernized) -->
+        <!-- Section 2, 3, 4: Details Information Grid -->
         <div class="info-table-container">
           <table class="info-table">
             <thead>
               <tr>
-                <th colspan="2" class="table-header-block">Short Information Details</th>
+                <th colspan="2" class="table-header-block">Short Information Details & Vacancy Matrix</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td style="width: 50%;">
-                  <h3 style="font-size: 15px; margin-bottom: 10px; color: var(--primary);">Important Dates</h3>
-                  <div id="datesList" style="font-size: 13.5px; color: var(--text-secondary);">
-                    <!-- Dynamic -->
+                  <h3 style="font-size: 15px; margin-bottom: 10px; color: var(--primary);">2. Important Dates</h3>
+                  <div style="font-size: 13.5px; color: var(--text-secondary);">
+                    <ul>
+                      {{IMPORTANT_DATES_LI}}
+                    </ul>
                   </div>
                 </td>
                 <td style="width: 50%;">
-                  <h3 style="font-size: 15px; margin-bottom: 10px; color: var(--primary);">Application Fee</h3>
-                  <div id="feesList" style="font-size: 13.5px; color: var(--text-secondary);">
-                    <!-- Dynamic -->
+                  <h3 style="font-size: 15px; margin-bottom: 10px; color: var(--primary);">3. Application Fee</h3>
+                  <div style="font-size: 13.5px; color: var(--text-secondary);">
+                    <ul>
+                      {{APPLICATION_FEE_LI}}
+                    </ul>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td colspan="2">
-                  <h3 style="font-size: 15px; margin-bottom: 10px; color: var(--primary);">Age Limit Parameters</h3>
-                  <div id="ageList" style="font-size: 13.5px; color: var(--text-secondary);">
-                    <!-- Dynamic -->
+                  <h3 style="font-size: 15px; margin-bottom: 10px; color: var(--primary);">4. Age Limit Parameters</h3>
+                  <div style="font-size: 13.5px; color: var(--text-secondary);">
+                    <ul>
+                      {{AGE_LIMIT_LI}}
+                    </ul>
                   </div>
                 </td>
               </tr>
               <tr class="table-subheader">
-                <td colspan="2">Qualification & Eligibility Criteria</td>
+                <td colspan="2">5. Eligibility Criteria & Educational Qualification</td>
               </tr>
               <tr>
-                <td colspan="2" id="qualificationText" style="line-height: 1.6;">
-                  Graduation details criteria here.
+                <td colspan="2" style="line-height: 1.7; font-size: 14px; color: var(--text-secondary);">
+                  {{ELIGIBILITY_DETAILS}}
                 </td>
               </tr>
               <tr class="table-subheader">
-                <td colspan="2">Selection Process & Exam Pattern</td>
+                <td colspan="2">6. Selection Process</td>
               </tr>
               <tr>
-                <td colspan="2">
-                  <p><strong>Selection Stages:</strong></p>
-                  <p id="selectionText" style="white-space: pre-line; margin-bottom: 12px; color: var(--text-secondary);"></p>
-                  <p><strong>Exam Pattern details:</strong></p>
-                  <p id="patternText" style="white-space: pre-line; color: var(--text-secondary);"></p>
+                <td colspan="2" style="white-space: pre-line; line-height: 1.7; font-size: 14px; color: var(--text-secondary);">
+                  {{SELECTION_PROCESS_STEPS}}
                 </td>
               </tr>
               <tr class="table-subheader">
-                <td colspan="2">Salary / Pay Scale Details</td>
+                <td colspan="2">7. Exam Pattern & Merit System</td>
               </tr>
               <tr>
-                <td colspan="2" id="salaryText">
-                  Salary scale basic info.
+                <td colspan="2" style="white-space: pre-line; line-height: 1.7; font-size: 14px; color: var(--text-secondary);">
+                  {{EXAM_PATTERN_DETAILS}}
                 </td>
               </tr>
               <tr class="table-subheader">
-                <td colspan="2">Detailed Exam Syllabus Outline</td>
+                <td colspan="2">8. Salary Scale & Perks</td>
               </tr>
               <tr>
-                <td colspan="2" id="syllabusText" style="white-space: pre-line; color: var(--text-secondary);">
-                  Syllabus units listed.
+                <td colspan="2" style="line-height: 1.7; font-size: 14px; color: var(--text-secondary);">
+                  {{SALARY_BENEFITS_DETAILS}}
+                </td>
+              </tr>
+              <tr class="table-subheader">
+                <td colspan="2">9. Syllabus Details</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="white-space: pre-line; line-height: 1.7; font-size: 14px; color: var(--text-secondary);">
+                  {{SYLLABUS_OUTLINE}}
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
+        <!-- Section 8: How to Apply (Step-by-Step) -->
+        <section style="margin: 28px 0; border-top: 1px solid var(--border-color); padding-top: 20px;">
+          <h2 style="font-size: 18px; margin-bottom: 10px; border-left: 4px solid var(--primary); padding-left: 8px;">10. How to Apply Online (Step-by-Step)</h2>
+          <div style="font-size: 14.5px; line-height: 1.7; color: var(--text-secondary); white-space: pre-line;">
+            {{APPLY_INSTRUCTIONS}}
+          </div>
+        </section>
+
+        <!-- Section 9: Preparation Tips (VERY IMPORTANT) -->
+        <section style="margin: 28px 0; background-color: var(--bg-tertiary); padding: 20px; border-radius: var(--border-radius); border-left: 5px solid var(--secondary);">
+          <h2 style="font-size: 18px; margin-bottom: 12px; color: var(--text-primary);">11. Preparation Strategy & Recommended Books (Important)</h2>
+          <div style="font-size: 14.5px; line-height: 1.7; color: var(--text-secondary); white-space: pre-line;">
+            {{PREPARATION_TIPS}}
+          </div>
+        </section>
+
         <!-- Action Links Section -->
         <div class="links-section">
-          <h2 style="font-size: 18px; margin-bottom: 16px; border-left: 4px solid var(--primary); padding-left: 8px;">Important Online Link Coordinates</h2>
-          <div class="btn-group" id="linksContainer">
-            <!-- Dynamic Buttons -->
+          <h2 style="font-size: 18px; margin-bottom: 16px; border-left: 4px solid var(--primary); padding-left: 8px;">Important Direct Apply Links</h2>
+          <div class="btn-group">
+            {{ACTION_LINKS_BUTTONS}}
           </div>
         </div>
 
         <!-- FAQ Section -->
-        <section class="faq-section" id="faqSection">
+        <section class="faq-section">
           <h2 style="font-size: 20px; margin-bottom: 16px; border-left: 4px solid var(--primary); padding-left: 8px;">Frequently Asked Questions (FAQ)</h2>
-          <div class="faq-list" id="faqList">
-            <!-- Injected FAQs -->
+          <div class="faq-list">
+            {{FAQ_ACCORDION_ITEMS}}
           </div>
         </section>
 
@@ -200,8 +241,8 @@
         <!-- Related Jobs Box -->
         <div class="sidebar-box">
           <h3 class="sidebar-title">Related Vacancies</h3>
-          <div class="sidebar-list" id="relatedJobsList">
-            <!-- Dynamic links -->
+          <div class="sidebar-list">
+            {{RELATED_VACANCIES_LIST}}
           </div>
         </div>
 
@@ -228,7 +269,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-logo-desc">
-        <a href="index.html" class="logo" style="margin-bottom: 8px;">
+        <a href="../index.html" class="logo" style="margin-bottom: 8px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="24" height="24" rx="6" fill="url(#logoGrad3)"/>
             <path d="M12 7V17M7 12H17" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
@@ -246,30 +287,30 @@
       <div>
         <h4 class="footer-title">Quick Links</h4>
         <div class="footer-links">
-          <a href="index.html#latest-jobs" class="footer-link">Latest Jobs</a>
-          <a href="index.html#admit-card" class="footer-link">Admit Card</a>
-          <a href="index.html#result" class="footer-link">Results</a>
-          <a href="index.html#answer-key" class="footer-link">Answer Keys</a>
-          <a href="index.html#syllabus" class="footer-link">Exam Syllabus</a>
-          <a href="yojana.html" class="footer-link">Sarkari Yojana</a>
+          <a href="../index.html#latest-jobs" class="footer-link">Latest Jobs</a>
+          <a href="../index.html#admit-card" class="footer-link">Admit Card</a>
+          <a href="../index.html#result" class="footer-link">Results</a>
+          <a href="../index.html#answer-key" class="footer-link">Answer Keys</a>
+          <a href="../index.html#syllabus" class="footer-link">Exam Syllabus</a>
+          <a href="../yojana.html" class="footer-link">Sarkari Yojana</a>
         </div>
       </div>
       <div>
         <h4 class="footer-title">Policies</h4>
         <div class="footer-links">
-          <a href="privacy.html" class="footer-link">Privacy Policy</a>
-          <a href="disclaimer.html" class="footer-link">Disclaimer</a>
-          <a href="terms.html" class="footer-link">Terms & Conditions</a>
-          <a href="dmca.html" class="footer-link">DMCA Policy</a>
+          <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+          <a href="../disclaimer.html" class="footer-link">Disclaimer</a>
+          <a href="../terms.html" class="footer-link">Terms & Conditions</a>
+          <a href="../dmca.html" class="footer-link">DMCA Policy</a>
         </div>
       </div>
       <div>
         <h4 class="footer-title">Support & Info</h4>
         <div class="footer-links">
-          <a href="about.html" class="footer-link">About Us</a>
-          <a href="contact.html" class="footer-link">Contact Us</a>
-          <a href="sitemap.html" class="footer-link">Interactive Sitemap</a>
-          <a href="sitemap.xml" class="footer-link" target="_blank">XML Sitemap (SEO)</a>
+          <a href="../about.html" class="footer-link">About Us</a>
+          <a href="../contact.html" class="footer-link">Contact Us</a>
+          <a href="../sitemap.html" class="footer-link">Interactive Sitemap</a>
+          <a href="../sitemap.xml" class="footer-link" target="_blank">XML Sitemap (SEO)</a>
         </div>
       </div>
     </div>
@@ -283,5 +324,12 @@
     </div>
   </footer>
 
+  <script>
+    // Collapsible FAQ Action Binder
+    function toggleFaq(element) {
+      const faqItem = element.parentElement;
+      faqItem.classList.toggle("active");
+    }
+  </script>
 </body>
 </html>
