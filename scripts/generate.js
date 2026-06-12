@@ -190,7 +190,57 @@ const remainingExams = [
   { id: "fci-assistant-grade-3-2026", name: "Food Corporation of India FCI Category III", dept: "Food Corporation of India (FCI)", cat: "Latest Jobs", sub: "Central", vac: 5043, fee: "₹500 for Gen/OBC, ₹0 SC/ST/Female/PwD", sal: "₹28,200 starting basic pay scale", age: "18-28 Years", qual: "Graduation + Computer typing skills." },
   { id: "isro-assistant-udc-2026", name: "ISRO Assistant, Junior Personal Assistant", dept: "Indian Space Research Organisation (ISRO)", cat: "Latest Jobs", sub: "Central", vac: 526, fee: "₹100 for all candidates", sal: "Level 4 Pay Matrix (₹25,500 basic pay)", age: "18-28 Years", qual: "Graduation with 60% marks + computer typing." },
   { id: "drdo-ceptam-11-2026", name: "DRDO CEPTAM 11 Technical & Administrative", dept: "Defence Research and Development Organisation", cat: "Latest Jobs", sub: "Central", vac: 1817, fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female/PwD", sal: "Level 2 to Level 6 depending on specific post", age: "18-28 Years", qual: "10th Pass + ITI, or Diploma/Degree in Science." },
-  { id: "epfo-ssa-2026", name: "EPFO Social Security Assistant", dept: "Employees' Provident Fund Organisation (EPFO)", cat: "Latest Jobs", sub: "Central", vac: 2677, fee: "₹700 for Gen/OBC, ₹0 SC/ST/Female", sal: "Level 5 Pay Matrix (₹29,200 basic pay)", age: "18-27 Years", qual: "Graduation in any stream + English typing skill." }
+  { id: "epfo-ssa-2026", name: "EPFO Social Security Assistant", dept: "Employees' Provident Fund Organisation (EPFO)", cat: "Latest Jobs", sub: "Central", vac: 2677, fee: "₹700 for Gen/OBC, ₹0 SC/ST/Female", sal: "Level 5 Pay Matrix (₹29,200 basic pay)", age: "18-27 Years", qual: "Graduation in any stream + English typing skill." },
+  { id: "jssc-cgl-2026", name: "JSSC CGL Recruitment", dept: "Jharkhand Staff Selection Commission", cat: "Latest Jobs", sub: "State Wise", vac: 2017, fee: "₹100 for Gen, ₹50 SC/ST", sal: "Level 7 (₹44,900 - ₹1,42,400)", age: "21-35 Years", qual: "Graduation in any stream." },
+  { id: "hpsc-hcs-2026", name: "Haryana Civil Services HCS", dept: "Haryana Public Service Commission (HPSC)", cat: "Latest Jobs", sub: "State Wise", vac: 121, fee: "₹1000 for Gen Male, ₹250 others", sal: "Level 10 (₹56,100 starting basic pay)", age: "18-42 Years", qual: "Graduation in any stream." },
+  { id: "gpsc-class12-2026", name: "GPSC Class 1 & 2 Exam", dept: "Gujarat Public Service Commission", cat: "Latest Jobs", sub: "State Wise", vac: 293, fee: "₹100 for Gen, ₹0 Reserves", sal: "Pay Matrix Level 9 / 10", age: "20-35 Years", qual: "Graduation in any stream." },
+  { id: "mpsc-rajyaseva-2026", name: "Maharashtra Rajyaseva Civil Services", dept: "Maharashtra Public Service Commission (MPSC)", cat: "Latest Jobs", sub: "State Wise", vac: 524, fee: "₹394 for Gen, ₹294 Reserves", sal: "Level 10 Pay scale (₹56,100 basic)", age: "19-38 Years", qual: "Graduation in any stream." },
+  { id: "tnpsc-group1-2026", name: "TNPSC Group 1 Civil Services", dept: "Tamil Nadu Public Service Commission", cat: "Latest Jobs", sub: "State Wise", vac: 90, fee: "₹150 Registration, ₹200 Prelims", sal: "Level 22 Pay scale (₹56,100 - ₹1,77,500)", age: "21-34 Years", qual: "Graduation in any stream." },
+  { id: "kpsc-kas-2026", name: "Karnataka KAS Civil Services", dept: "Karnataka Public Service Commission", cat: "Latest Jobs", sub: "State Wise", vac: 384, fee: "₹600 for Gen, ₹300 OBC, ₹0 SC/ST", sal: "Group A (₹28,100 - ₹50,100 starting basic)", age: "21-35 Years", qual: "Graduation in any stream." },
+  { id: "appsc-group1-2026", name: "APPSC Group 1 Services", dept: "Andhra Pradesh Public Service Commission", cat: "Latest Jobs", sub: "State Wise", vac: 110, fee: "₹250 Processing, ₹120 Exam fee", sal: "Starting basic pay ₹56,100 plus allowances", age: "18-42 Years", qual: "Graduation in any stream." },
+  { id: "tspsc-group1-2026", name: "TSPSC Group 1 Services", dept: "Telangana State Public Service Commission", cat: "Latest Jobs", sub: "State Wise", vac: 563, fee: "₹200 online app fee, ₹120 exam fee", sal: "Starting basic pay ₹58,850/month", age: "18-44 Years", qual: "Graduation in any stream." },
+  { id: "opsc-ocs-2026", name: "Odisha OCS Civil Services", dept: "Odisha Public Service Commission (OPSC)", cat: "Latest Jobs", sub: "State Wise", vac: 399, fee: "₹0 for all candidates", sal: "Level 10/12 Pay matrix", age: "21-38 Years", qual: "Graduation in any stream." },
+  { id: "wbcse-pre-2026", name: "West Bengal Civil Services Exam WBCS", dept: "West Bengal PSC", cat: "Latest Jobs", sub: "State Wise", vac: 250, fee: "₹210 for Gen, ₹0 SC/ST of WB", sal: "Group A starting basic pay ₹56,100", age: "21-36 Years", qual: "Graduation + Ability to read/write Bengali." },
+  { id: "fci-manager-2026", name: "Food Corporation of India FCI Manager", dept: "Food Corporation of India (FCI)", cat: "Latest Jobs", sub: "Central", vac: 113, fee: "₹800 for Gen, ₹0 SC/ST/Female", sal: "₹40,000 - ₹1,40,000 starting basic pay", age: "18-28/35 Years", qual: "Graduation with 60% or MBA/CA." },
+  { id: "isro-scientist-2026", name: "ISRO Scientist Engineer SC", dept: "Indian Space Research Organisation (ISRO)", cat: "Latest Jobs", sub: "Central", vac: 324, fee: "₹250 for all candidates", sal: "Level 10 Pay Matrix (₹56,100 starting basic pay)", age: "18-28 Years", qual: "B.E/B.Tech in Engg with minimum 65% aggregate." },
+  { id: "epfo-eo-ao-2026", name: "EPFO Enforcement Officer EO AO", dept: "Union Public Service Commission (UPSC)", cat: "Latest Jobs", sub: "UPSC", vac: 418, fee: "₹25 for Gen/OBC, ₹0 SC/ST/Female", sal: "Level 8 Pay Matrix (₹47,600 basic pay)", age: "Maximum 30 Years", qual: "Graduation in any stream." },
+  { id: "lic-ado-2026", name: "LIC Apprentice Development Officer ADO", dept: "Life Insurance Corporation of India (LIC)", cat: "Latest Jobs", sub: "Banking", vac: 9394, fee: "₹750 for Gen/OBC, ₹100 SC/ST", sal: "Stipend of ₹51,500/month during training", age: "21-30 Years", qual: "Graduation in any stream." },
+  { id: "niacl-ao-2026", name: "NIACL Administrative Officer AO", dept: "New India Assurance", cat: "Latest Jobs", sub: "Banking", vac: 450, fee: "₹850 for Gen/OBC, ₹100 SC/ST/PwD", sal: "Starting basic pay ₹50,925 (Gross ₹80,000/mo)", age: "21-30 Years", qual: "Graduation/Post Graduation with 60% marks." },
+  { id: "uiic-ao-2026", name: "UIIC Administrative Officer AO", dept: "United India Insurance", cat: "Latest Jobs", sub: "Banking", vac: 250, fee: "₹1000 for Gen/OBC, ₹250 SC/ST", sal: "Gross salary approx ₹88,000 per month", age: "21-30 Years", qual: "Graduation with 60% marks." },
+  { id: "nicl-ao-2026", name: "NICL Administrative Officer AO", dept: "National Insurance Company", cat: "Latest Jobs", sub: "Banking", vac: 274, fee: "₹1000 for Gen/OBC, ₹250 SC/ST/PwD", sal: "Starting basic pay ₹50,925 (Total ₹85,000/mo)", age: "21-30 Years", qual: "Graduation/Post Graduation with 60% marks." },
+  { id: "oicl-ao-2026", name: "OICL Administrative Officer AO", dept: "Oriental Insurance Company", cat: "Latest Jobs", sub: "Banking", vac: 100, fee: "₹1000 for Gen/OBC, ₹250 SC/ST", sal: "Gross salary approx ₹85,000 per month", age: "21-30 Years", qual: "Graduation with 60% marks." },
+  { id: "nabard-grade-a-2026", name: "NABARD Assistant Manager Grade A", dept: "NABARD", cat: "Latest Jobs", sub: "Banking", vac: 150, fee: "₹800 for Gen/OBC, ₹150 SC/ST/PwD", sal: "Gross salary approx ₹84,000 per month", age: "21-30 Years", qual: "Graduation with 60% marks in relevant stream." },
+  { id: "sidbi-grade-a-2026", name: "SIDBI Assistant Manager Grade A", dept: "SIDBI", cat: "Latest Jobs", sub: "Banking", vac: 120, fee: "₹1100 for Gen/OBC, ₹175 SC/ST/PwD", sal: "Gross salary approx ₹90,000 per month", age: "21-28 Years", qual: "Graduation in Law/Engineering or Post Graduation." },
+  { id: "dmrc-je-2026", name: "DMRC Junior Engineer", dept: "Delhi Metro Rail Corporation", cat: "Latest Jobs", sub: "Central", vac: 150, fee: "₹500 for Gen/OBC, ₹250 SC/ST/Female", sal: "₹37,000 - ₹1,15,000 starting pay scale", age: "18-28 Years", qual: "3 Years Diploma in Engineering in relevant stream." },
+  { id: "upmetro-je-2026", name: "UP Metro LMRC Junior Engineer JE", dept: "UPMRC", cat: "Latest Jobs", sub: "State Wise", vac: 132, fee: "₹590 for Gen/OBC, ₹236 SC/ST of UP", sal: "₹33,000 - ₹67,300 starting basic pay scale", age: "21-28 Years", qual: "3 Years Diploma in Civil/Electrical/Electronics." },
+  { id: "rrb-sse-2026", name: "Railway RRB Senior Section Engineer SSE", dept: "RRB", cat: "Latest Jobs", sub: "Railway", vac: 1250, fee: "₹500 for Gen/OBC, ₹250 SC/ST/Female", sal: "Level 7 Pay scale starting basic ₹44,900/mo", age: "20-34 Years", qual: "B.E/B.Tech degree in engineering in relevant branch." },
+  { id: "rrb-rpf-si-2026", name: "RPF Sub Inspector SI Recruitment", dept: "Railway Recruitment Boards", cat: "Latest Jobs", sub: "Railway", vac: 452, fee: "₹500 for Gen/OBC, ₹250 SC/ST/Female", sal: "Pay Level 6 starting basic ₹35,400 plus perks", age: "20-28 Years", qual: "Graduation in any stream." },
+  { id: "rrb-rpf-constable-2026", name: "RPF Constable Recruitment 2026", dept: "Railway Recruitment Boards", cat: "Latest Jobs", sub: "Railway", vac: 4208, fee: "₹500 for Gen/OBC, ₹250 SC/ST/Female", sal: "Pay Level 3 starting basic ₹21,700 plus perks", age: "18-28 Years", qual: "10th Class Pass." },
+  { id: "idbi-executive-2026", name: "IDBI Bank Executive Contractual", dept: "IDBI Bank", cat: "Latest Jobs", sub: "Banking", vac: 1300, fee: "₹1000 for Gen/OBC, ₹200 SC/ST/PwD", sal: "₹29,000/mo for 1st Year, ₹31,000/mo for 2nd Year", age: "20-25 Years", qual: "Graduation in any stream." },
+  { id: "idbi-am-2026", name: "IDBI Bank Assistant Manager Grade A", dept: "IDBI Bank", cat: "Latest Jobs", sub: "Banking", vac: 600, fee: "₹1000 for Gen/OBC, ₹200 SC/ST/PwD", sal: "Starting basic pay ₹36,000 (Gross ₹60,000/mo)", age: "21-30 Years", qual: "Graduation in any stream + PGDBF Course." },
+  { id: "nhb-am-2026", name: "National Housing Bank Assistant Manager", dept: "NHB", cat: "Latest Jobs", sub: "Banking", vac: 43, fee: "₹850 for Gen/OBC, ₹175 SC/ST/PwD", sal: "Starting basic pay Scale I (Total ₹75,000/mo)", age: "21-30 Years", qual: "Graduation with 60% marks in any stream." },
+  { id: "eximbank-mt-2026", name: "EXIM Bank Management Trainee MT", dept: "India EXIM Bank", cat: "Latest Jobs", sub: "Banking", vac: 45, fee: "₹600 for Gen/OBC, ₹100 SC/ST/Females", sal: "Stipend of ₹55,000/month during training", age: "21-25 Years", qual: "MBA/PGDBA or Chartered Accountant." },
+  { id: "ecgc-po-2026", name: "ECGC PO Probationary Officers", dept: "Export Credit Guarantee Corporation", cat: "Latest Jobs", sub: "Banking", vac: 75, fee: "₹850 for Gen/OBC, ₹175 SC/ST/PwD", sal: "Gross salary approx ₹1,02,000 per month", age: "21-30 Years", qual: "Graduation in any stream." },
+  { id: "cisf-hc-2026", name: "CISF Head Constable Ministerial", dept: "Central Industrial Security Force", cat: "Latest Jobs", sub: "Central", vac: 418, fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female", sal: "Level 4 Pay Matrix (₹25,500 - ₹81,100)", age: "18-25 Years", qual: "12th Class Pass + computer typing skill test." },
+  { id: "cisf-constable-gd-2026", name: "CISF Constable GD Recruitment", dept: "Central Industrial Security Force", cat: "Latest Jobs", sub: "Central", vac: 11025, fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female", sal: "Pay Level 3 (₹21,700 - ₹69,100)", age: "18-23 Years", qual: "10th Class Pass." },
+  { id: "bsf-si-2026", name: "BSF Sub Inspector SI Recruitment", dept: "Border Security Force", cat: "Latest Jobs", sub: "Central", vac: 120, fee: "₹200 for Gen/OBC, ₹0 SC/ST/Female", sal: "Level 6 Pay scale starting basic ₹35,400/mo", age: "20-25 Years", qual: "Graduation in any stream." },
+  { id: "bsf-constable-2026", name: "BSF Constable GD Recruitment", dept: "Border Security Force", cat: "Latest Jobs", sub: "Central", vac: 6174, fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female", sal: "Pay Level 3 (₹21,700 - ₹69,100)", age: "18-23 Years", qual: "10th Class Pass." },
+  { id: "crpf-si-2026", name: "CRPF Sub Inspector SI Recruitment", dept: "Central Reserve Police Force", cat: "Latest Jobs", sub: "Central", vac: 156, fee: "₹200 for Gen/OBC, ₹0 SC/ST/Female", sal: "Level 6 Pay Matrix (₹35,400 - ₹1,12,400)", age: "20-25 Years", qual: "Graduation in any stream." },
+  { id: "crpf-constable-gd-2026", name: "CRPF Constable GD Recruitment", dept: "Central Reserve Police Force", cat: "Latest Jobs", sub: "Central", vac: 16927, fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female", sal: "Pay Level 3 (₹21,700 - ₹69,100)", age: "18-23 Years", qual: "10th Class Pass." },
+  { id: "itbp-si-2026", name: "ITBP Sub Inspector SI", dept: "Indo-Tibetan Border Police", cat: "Latest Jobs", sub: "Central", vac: 85, fee: "₹200 for Gen/OBC, ₹0 SC/ST/Female", sal: "Level 6 Pay scale starting basic ₹35,400/mo", age: "20-25 Years", qual: "Graduation in any stream." },
+  { id: "itbp-constable-2026", name: "ITBP Constable GD Recruitment", dept: "Indo-Tibetan Border Police", cat: "Latest Jobs", sub: "Central", vac: 5410, fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female", sal: "Pay Level 3 (₹21,700 - ₹69,100)", age: "18-23 Years", qual: "10th Class Pass." },
+  { id: "ssb-si-2026", name: "SSB Sub Inspector SI Recruitment", dept: "Sashastra Seema Bal", cat: "Latest Jobs", sub: "Central", vac: 111, fee: "₹200 for Gen/OBC, ₹0 SC/ST/Female", sal: "Level 6 Pay scale starting basic ₹35,400/mo", age: "20-25 Years", qual: "Graduation in any stream." },
+  { id: "ssb-constable-gd-2026", name: "SSB Constable GD Recruitment", dept: "Sashastra Seema Bal", cat: "Latest Jobs", sub: "Central", vac: 1928, fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female", sal: "Pay Level 3 (₹21,700 - ₹69,100)", age: "18-23 Years", qual: "10th Class Pass." },
+  { id: "rrb-paramedical-2026", name: "Railway RRB Paramedical Staff", dept: "Railway Recruitment Boards", cat: "Admit Card", sub: "Railway", vac: 1376, fee: "₹500 for Gen, ₹250 reserves", sal: "Level 4 to 7 Pay Matrix starting pay scale", age: "18-40 Years", qual: "Degree/Diploma in relevant paramedical field." },
+  { id: "dsssb-tgt-pgt-2026", name: "DSSSB TGT PGT Teacher Recruitment", dept: "Delhi Subordinate Services Selection Board", cat: "Admit Card", sub: "State Wise", vac: 4762, fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female", sal: "Pay level 8 starting basic pay ₹47,600", age: "Maximum 30 Years (36 for PGT)", qual: "Graduation + B.Ed + CTET (for TGT)." },
+  { id: "upsssc-pet-2026", name: "UPSSSC Preliminary Eligibility Test PET", dept: "Uttar Pradesh Subordinate Services Selection Commission", cat: "Result", sub: "State Wise", vac: 0, fee: "₹185 for Gen/OBC, ₹95 SC/ST", sal: "Eligibility Certificate (Valid for Group C recruitments)", age: "18-40 Years", qual: "10th Class Pass from recognized board." },
+  { id: "upsssc-vdo-2026", name: "UPSSSC Gram Vikas Adhikari VDO", dept: "Uttar Pradesh Subordinate Services Selection Commission", cat: "Result", sub: "State Wise", vac: 1468, fee: "₹185 for Gen/OBC, ₹95 SC/ST", sal: "Pay level 3 (₹21,700 - ₹69,100 starting basic)", age: "18-40 Years", qual: "12th Class Pass + CCC computer certificate." },
+  { id: "mppeb-patwari-2026", name: "MPPEB Patwari & Group 2 Sub Group 4", dept: "MP ESB Board", cat: "Result", sub: "State Wise", vac: 9073, fee: "₹500 for Gen, ₹250 SC/ST of MP", sal: "Pay scale ₹5200 - ₹20200 + Grade Pay ₹2100", age: "18-40 Years", qual: "Graduation in any stream + CPCT card." },
+  { id: "rsmssb-patwari-2026", name: "RSMSSB Patwari Recruitment 2026", dept: "Rajasthan Staff Selection Board", cat: "Answer Key", sub: "State Wise", vac: 2998, fee: "₹600 for Gen/OBC, ₹400 SC/ST/Reserves", sal: "L-5 starting basic pay ₹20,800/month", age: "18-40 Years", qual: "Graduation in any stream + computer certificate." },
+  { id: "uksssc-grad-2026", name: "UKSSSC Graduate Level VDO/VPDO", dept: "Uttarakhand Subordinate Services", cat: "Answer Key", sub: "State Wise", vac: 829, fee: "₹300 for Gen/OBC, ₹150 SC/ST", sal: "Pay Matrix Level 4/5 (₹25,500 - ₹81,100)", age: "18-42 Years", qual: "Graduation in any stream." },
+  { id: "jssc-excise-2026", name: "JSSC Excise Constable JCECE", dept: "Jharkhand Selection Board", cat: "Syllabus", sub: "State Wise", vac: 583, fee: "₹100 for Gen, ₹50 SC/ST of JH", sal: "Pay level 3 (₹21,700 - ₹69,100 starting basic)", age: "18-25 Years", qual: "10th Class Pass." },
+  { id: "gseb-tet-2026", name: "Gujarat Teacher Eligibility Test TET", dept: "Gujarat Secondary Education Board", cat: "Syllabus", sub: "State Wise", vac: 0, fee: "₹350 for Gen, ₹250 reserves", sal: "Eligibility Certificate for teacher hiring", age: "No age limit", qual: "Graduation + B.Ed / D.El.Ed." },
+  { id: "bihar-cdpo-2026", name: "Bihar BPSC Child Development Officer CDPO", dept: "Bihar Public Service Commission (BPSC)", cat: "Syllabus", sub: "State Wise", vac: 55, fee: "₹600 for Gen, ₹150 Reserves", sal: "Starting basic pay ₹53,100 (Level 9 Pay scale)", age: "21-37 Years (Males), 40 (Females)", qual: "Graduation in any stream." }
 ];
 
 // Helper to format dates to text
@@ -253,6 +303,273 @@ remainingExams.forEach(rem => {
   exams.push(cleanRem);
 });
 
+// Helper function to resolve authentic official links for exams
+function getOfficialLinks(job) {
+  let officialUrl = "https://www.google.com";
+  let applyUrl = "https://www.google.com";
+  let notificationUrl = "https://www.google.com";
+
+  const id = job.id.toLowerCase();
+  const dept = (job.department || "").toLowerCase();
+  const title = (job.title || "").toLowerCase();
+
+  if (id.includes("upsc") || dept.includes("union public service commission")) {
+    officialUrl = "https://upsc.gov.in";
+    applyUrl = "https://upsconline.nic.in";
+    notificationUrl = "https://upsc.gov.in/examinations/active-exams";
+  } else if (id.includes("ssc") || dept.includes("staff selection commission")) {
+    officialUrl = "https://ssc.gov.in";
+    applyUrl = "https://ssc.gov.in";
+    notificationUrl = "https://ssc.gov.in";
+  } else if (id.includes("rrb") || dept.includes("railway recruitment board")) {
+    officialUrl = "https://indianrailways.gov.in";
+    applyUrl = "https://indianrailways.gov.in";
+    notificationUrl = "https://indianrailways.gov.in";
+  } else if (id.includes("ibps") || dept.includes("institute of banking personnel selection")) {
+    officialUrl = "https://ibps.in";
+    applyUrl = "https://ibps.in";
+    notificationUrl = "https://ibps.in";
+  } else if (id.includes("sbi") || dept.includes("state bank of india")) {
+    officialUrl = "https://bank.sbi/careers";
+    applyUrl = "https://bank.sbi/careers";
+    notificationUrl = "https://bank.sbi/careers";
+  } else if (id.includes("lic") || dept.includes("life insurance corporation")) {
+    officialUrl = "https://licindia.in/careers";
+    applyUrl = "https://licindia.in/careers";
+    notificationUrl = "https://licindia.in/careers";
+  } else if (id.includes("rbi") || dept.includes("reserve bank of india")) {
+    officialUrl = "https://rbi.org.in";
+    applyUrl = "https://rbi.org.in";
+    notificationUrl = "https://rbi.org.in";
+  } else if (id.includes("up-police") || dept.includes("uttar pradesh police")) {
+    officialUrl = "https://uppbpb.gov.in";
+    applyUrl = "https://uppbpb.gov.in";
+    notificationUrl = "https://uppbpb.gov.in";
+  } else if (id.includes("bpssc") || id.includes("daroga")) {
+    officialUrl = "https://bpssc.bih.nic.in";
+    applyUrl = "https://bpssc.bih.nic.in";
+    notificationUrl = "https://bpssc.bih.nic.in";
+  } else if (id.includes("bssc")) {
+    officialUrl = "https://bssc.bihar.gov.in";
+    applyUrl = "https://bssc.bihar.gov.in";
+    notificationUrl = "https://bssc.bihar.gov.in";
+  } else if (id.includes("bihar-police") || dept.includes("central selection board of constables")) {
+    officialUrl = "https://csbc.bih.nic.in";
+    applyUrl = "https://csbc.bih.nic.in";
+    notificationUrl = "https://csbc.bih.nic.in";
+  } else if (id.includes("delhi-police")) {
+    officialUrl = "https://delhipolice.gov.in";
+    applyUrl = "https://ssc.gov.in";
+    notificationUrl = "https://ssc.gov.in";
+  } else if (id.includes("airforce")) {
+    officialUrl = "https://agnipathvayu.cdac.in";
+    applyUrl = "https://agnipathvayu.cdac.in";
+    notificationUrl = "https://agnipathvayu.cdac.in";
+  } else if (id.includes("navy")) {
+    officialUrl = "https://joinindiannavy.gov.in";
+    applyUrl = "https://joinindiannavy.gov.in";
+    notificationUrl = "https://joinindiannavy.gov.in";
+  } else if (id.includes("army")) {
+    officialUrl = "https://joinindianarmy.nic.in";
+    applyUrl = "https://joinindianarmy.nic.in";
+    notificationUrl = "https://joinindianarmy.nic.in";
+  } else if (id.includes("super-tet") || id.includes("uptet") || dept.includes("basic education board")) {
+    officialUrl = "https://updeled.gov.in";
+    applyUrl = "https://updeled.gov.in";
+    notificationUrl = "https://updeled.gov.in";
+  } else if (id.includes("uppsc") || dept.includes("uppsc") || dept.includes("uttar pradesh public service")) {
+    officialUrl = "https://uppsc.up.nic.in";
+    applyUrl = "https://uppsc.up.nic.in";
+    notificationUrl = "https://uppsc.up.nic.in";
+  } else if (id.includes("bpsc") || dept.includes("bpsc") || dept.includes("bihar public service")) {
+    officialUrl = "https://bpsc.bih.nic.in";
+    applyUrl = "https://bpsc.bih.nic.in";
+    notificationUrl = "https://bpsc.bih.nic.in";
+  } else if (id.includes("mppsc") || dept.includes("mppsc") || dept.includes("madhya pradesh public service")) {
+    officialUrl = "https://mppsc.mp.gov.in";
+    applyUrl = "https://mppsc.mp.gov.in";
+    notificationUrl = "https://mppsc.mp.gov.in";
+  } else if (id.includes("mppeb") || dept.includes("mp esb") || dept.includes("employees selection board")) {
+    officialUrl = "https://esb.mp.gov.in";
+    applyUrl = "https://esb.mp.gov.in";
+    notificationUrl = "https://esb.mp.gov.in";
+  } else if (id.includes("rajasthan-police") || (id.includes("rajasthan") && title.includes("constable"))) {
+    officialUrl = "https://police.rajasthan.gov.in";
+    applyUrl = "https://police.rajasthan.gov.in";
+    notificationUrl = "https://police.rajasthan.gov.in";
+  } else if (id.includes("reet") || dept.includes("secondary education board rajasthan")) {
+    officialUrl = "https://rajeduboard.rajasthan.gov.in";
+    applyUrl = "https://rajeduboard.rajasthan.gov.in";
+    notificationUrl = "https://rajeduboard.rajasthan.gov.in";
+  } else if (id.includes("ras") || id.includes("rpsc") || dept.includes("rpsc") || dept.includes("rajasthan public service")) {
+    officialUrl = "https://rpsc.rajasthan.gov.in";
+    applyUrl = "https://rpsc.rajasthan.gov.in";
+    notificationUrl = "https://rpsc.rajasthan.gov.in";
+  } else if (id.includes("ukpsc") || dept.includes("ukpsc") || dept.includes("uttarakhand public service")) {
+    officialUrl = "https://psc.uk.gov.in";
+    applyUrl = "https://psc.uk.gov.in";
+    notificationUrl = "https://psc.uk.gov.in";
+  } else if (id.includes("hssc") || dept.includes("hssc") || dept.includes("haryana staff selection")) {
+    officialUrl = "https://hssc.gov.in";
+    applyUrl = "https://hssc.gov.in";
+    notificationUrl = "https://hssc.gov.in";
+  } else if (id.includes("gds") || dept.includes("india post")) {
+    officialUrl = "https://indiapostgdsonline.gov.in";
+    applyUrl = "https://indiapostgdsonline.gov.in";
+    notificationUrl = "https://indiapostgdsonline.gov.in";
+  } else if (id.includes("fci") || dept.includes("fci") || dept.includes("food corporation of india")) {
+    officialUrl = "https://fci.gov.in";
+    applyUrl = "https://fci.gov.in/category-three-pages.php?save_id=MTc=";
+    notificationUrl = "https://fci.gov.in";
+  } else if (id.includes("isro") || dept.includes("isro") || dept.includes("space research")) {
+    officialUrl = "https://isro.gov.in";
+    applyUrl = "https://isro.gov.in/careers";
+    notificationUrl = "https://isro.gov.in";
+  } else if (id.includes("drdo") || dept.includes("drdo") || dept.includes("defence research")) {
+    officialUrl = "https://drdo.gov.in";
+    applyUrl = "https://drdo.gov.in/careers";
+    notificationUrl = "https://drdo.gov.in";
+  } else if (id.includes("epfo") || dept.includes("epfo") || dept.includes("provident fund")) {
+    officialUrl = "https://epfindia.gov.in";
+    applyUrl = "https://epfindia.gov.in";
+    notificationUrl = "https://epfindia.gov.in";
+  } else if (id.includes("jssc") || dept.includes("jssc") || dept.includes("jharkhand staff selection")) {
+    officialUrl = "https://jssc.nic.in";
+    applyUrl = "https://jssc.nic.in";
+    notificationUrl = "https://jssc.nic.in";
+  } else if (id.includes("hpsc") || dept.includes("hpsc") || dept.includes("haryana public service")) {
+    officialUrl = "https://hpsc.gov.in";
+    applyUrl = "https://hpsc.gov.in";
+    notificationUrl = "https://hpsc.gov.in";
+  } else if (id.includes("gpsc") || dept.includes("gpsc") || dept.includes("gujarat public service")) {
+    officialUrl = "https://gpsc.gujarat.gov.in";
+    applyUrl = "https://gpsc.gujarat.gov.in";
+    notificationUrl = "https://gpsc.gujarat.gov.in";
+  } else if (id.includes("mpsc") || dept.includes("mpsc") || dept.includes("maharashtra public service")) {
+    officialUrl = "https://mpsc.gov.in";
+    applyUrl = "https://mpsc.gov.in";
+    notificationUrl = "https://mpsc.gov.in";
+  } else if (id.includes("tnpsc") || dept.includes("tnpsc") || dept.includes("tamil nadu public service")) {
+    officialUrl = "https://tnpsc.gov.in";
+    applyUrl = "https://tnpsc.gov.in";
+    notificationUrl = "https://tnpsc.gov.in";
+  } else if (id.includes("kpsc") || dept.includes("kpsc") || dept.includes("karnataka public service")) {
+    officialUrl = "https://kpsc.kar.nic.in";
+    applyUrl = "https://kpsc.kar.nic.in";
+    notificationUrl = "https://kpsc.kar.nic.in";
+  } else if (id.includes("appsc") || dept.includes("appsc") || dept.includes("andhra pradesh public service")) {
+    officialUrl = "https://psc.ap.gov.in";
+    applyUrl = "https://psc.ap.gov.in";
+    notificationUrl = "https://psc.ap.gov.in";
+  } else if (id.includes("tspsc") || dept.includes("tspsc") || dept.includes("telangana state public service")) {
+    officialUrl = "https://tspsc.gov.in";
+    applyUrl = "https://tspsc.gov.in";
+    notificationUrl = "https://tspsc.gov.in";
+  } else if (id.includes("opsc") || dept.includes("opsc") || dept.includes("odisha public service")) {
+    officialUrl = "https://opsc.gov.in";
+    applyUrl = "https://opsc.gov.in";
+    notificationUrl = "https://opsc.gov.in";
+  } else if (id.includes("wbcse") || id.includes("wbcs") || dept.includes("west bengal psc") || dept.includes("west bengal public service")) {
+    officialUrl = "https://psc.wb.gov.in";
+    applyUrl = "https://psc.wb.gov.in";
+    notificationUrl = "https://psc.wb.gov.in";
+  } else if (id.includes("niacl")) {
+    officialUrl = "https://newindia.co.in";
+    applyUrl = "https://newindia.co.in";
+    notificationUrl = "https://newindia.co.in";
+  } else if (id.includes("uiic")) {
+    officialUrl = "https://uiic.co.in";
+    applyUrl = "https://uiic.co.in";
+    notificationUrl = "https://uiic.co.in";
+  } else if (id.includes("nicl")) {
+    officialUrl = "https://nationalinsurance.nic.in";
+    applyUrl = "https://nationalinsurance.nic.in";
+    notificationUrl = "https://nationalinsurance.nic.in";
+  } else if (id.includes("oicl")) {
+    officialUrl = "https://orientalinsurance.org.in";
+    applyUrl = "https://orientalinsurance.org.in";
+    notificationUrl = "https://orientalinsurance.org.in";
+  } else if (id.includes("nabard")) {
+    officialUrl = "https://nabard.org";
+    applyUrl = "https://nabard.org";
+    notificationUrl = "https://nabard.org";
+  } else if (id.includes("sidbi")) {
+    officialUrl = "https://sidbi.in";
+    applyUrl = "https://sidbi.in";
+    notificationUrl = "https://sidbi.in";
+  } else if (id.includes("dmrc")) {
+    officialUrl = "https://delhimetrorail.com";
+    applyUrl = "https://delhimetrorail.com";
+    notificationUrl = "https://delhimetrorail.com";
+  } else if (id.includes("upmetro") || id.includes("lmrc")) {
+    officialUrl = "https://upmetrorail.com";
+    applyUrl = "https://upmetrorail.com";
+    notificationUrl = "https://upmetrorail.com";
+  } else if (id.includes("idbi")) {
+    officialUrl = "https://idbibank.in";
+    applyUrl = "https://idbibank.in";
+    notificationUrl = "https://idbibank.in";
+  } else if (id.includes("nhb")) {
+    officialUrl = "https://nhb.org.in";
+    applyUrl = "https://nhb.org.in";
+    notificationUrl = "https://nhb.org.in";
+  } else if (id.includes("eximbank")) {
+    officialUrl = "https://eximbankindia.in";
+    applyUrl = "https://eximbankindia.in";
+    notificationUrl = "https://eximbankindia.in";
+  } else if (id.includes("ecgc")) {
+    officialUrl = "https://ecgc.in";
+    applyUrl = "https://ecgc.in";
+    notificationUrl = "https://ecgc.in";
+  } else if (id.includes("cisf")) {
+    officialUrl = "https://cisfrectt.cisf.gov.in";
+    applyUrl = "https://cisfrectt.cisf.gov.in";
+    notificationUrl = "https://cisfrectt.cisf.gov.in";
+  } else if (id.includes("bsf")) {
+    officialUrl = "https://rectt.bsf.gov.in";
+    applyUrl = "https://rectt.bsf.gov.in";
+    notificationUrl = "https://rectt.bsf.gov.in";
+  } else if (id.includes("crpf")) {
+    officialUrl = "https://rect.crpf.gov.in";
+    applyUrl = "https://rect.crpf.gov.in";
+    notificationUrl = "https://rect.crpf.gov.in";
+  } else if (id.includes("itbp")) {
+    officialUrl = "https://recruitment.itbpolice.nic.in";
+    applyUrl = "https://recruitment.itbpolice.nic.in";
+    notificationUrl = "https://recruitment.itbpolice.nic.in";
+  } else if (id.includes("ssb")) {
+    officialUrl = "https://ssbrectt.gov.in";
+    applyUrl = "https://ssbrectt.gov.in";
+    notificationUrl = "https://ssbrectt.gov.in";
+  } else if (id.includes("dsssb")) {
+    officialUrl = "https://dsssb.delhi.gov.in";
+    applyUrl = "https://dsssb.delhi.gov.in";
+    notificationUrl = "https://dsssb.delhi.gov.in";
+  } else if (id.includes("upsssc")) {
+    officialUrl = "https://upsssc.gov.in";
+    applyUrl = "https://upsssc.gov.in";
+    notificationUrl = "https://upsssc.gov.in";
+  } else if (id.includes("rsmssb")) {
+    officialUrl = "https://rsmssb.rajasthan.gov.in";
+    applyUrl = "https://rsmssb.rajasthan.gov.in";
+    notificationUrl = "https://rsmssb.rajasthan.gov.in";
+  } else if (id.includes("uksssc")) {
+    officialUrl = "https://sssc.uk.gov.in";
+    applyUrl = "https://sssc.uk.gov.in";
+    notificationUrl = "https://sssc.uk.gov.in";
+  } else if (id.includes("ctet") || dept.includes("cbse")) {
+    officialUrl = "https://ctet.nic.in";
+    applyUrl = "https://ctet.nic.in";
+    notificationUrl = "https://ctet.nic.in";
+  } else if (id.includes("gseb")) {
+    officialUrl = "https://gseb.org";
+    applyUrl = "https://gseb.org";
+    notificationUrl = "https://gseb.org";
+  }
+
+  return { officialUrl, applyUrl, notificationUrl };
+}
+
 // Load static HTML compilation template
 const template = fs.readFileSync(templatePath, 'utf8');
 
@@ -263,7 +580,7 @@ exams.forEach(job => {
   let applyInstructions = "";
   let prepTips = "";
   let actionButtons = "";
-  const officialWebsite = "https://www.google.com";
+  const urls = getOfficialLinks(job);
 
   if (job.category === "Admit Card") {
     introduction = `${job.department} has officially declared the Admit Card / Hall Ticket release details for the ${job.shortTitle} 2026. Candidates who have registered successfully for this recruitment exam are advised to download their hall tickets to know their designated test centers, roll numbers, and shift timings. The admit card is a compulsory requirement to enter the examination center premises. Please read below for the direct download links and download instructions.`;
@@ -288,9 +605,9 @@ exams.forEach(job => {
 - **Prohibited Items:** Do not carry bags, cellphones, calculators, notebooks, smartwatches, or metallic items inside the exam hall.`;
 
     actionButtons = `
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download Admit Card (Server 1)</a>
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Admit Card (Server 2)</a>
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Official Website</a>
+      <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download Admit Card (Server 1)</a>
+      <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Admit Card (Server 2)</a>
+      <a href="${urls.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Official Website</a>
     `;
   } else if (job.category === "Result") {
     introduction = `${job.department} has officially declared the written examination results and category-wise cut-off scores for ${job.shortTitle} 2026. All candidates who appeared for the screening test can now check their selection status, view sectional scorecards, and download the PDF lists of candidates qualified for the next rounds (such as PET/PST physical tests, main written tests, or interviews). Read below to learn how to access your results and check the cut-off marks.`;
@@ -316,9 +633,9 @@ exams.forEach(job => {
   * Keep all educational certificates, caste certificates, and identity documents organized in a folder for upcoming document checks.`;
 
     actionButtons = `
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download Result PDF (Selected List)</a>
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Category Cut-Off Notice</a>
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Check Score Card / Marks</a>
+      <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download Result PDF (Selected List)</a>
+      <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Category Cut-Off Notice</a>
+      <a href="${urls.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Check Score Card / Marks</a>
     `;
   } else {
     // Default: Job Application/Syllabus/Answer Key Formats
@@ -345,9 +662,9 @@ exams.forEach(job => {
 - **Maintain a Positive Mindset:** Keep revision notes handy and prioritize regular rest to prevent mental fatigue during final exam days.`;
 
     actionButtons = `
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Apply Online Link</a>
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Official Notification</a>
-      <a href="${officialWebsite}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Official Website</a>
+      <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Apply Online Link</a>
+      <a href="${urls.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Official Notification</a>
+      <a href="${urls.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Official Website</a>
     `;
   }
 
@@ -444,7 +761,7 @@ exams.forEach(job => {
   let outputHtml = template
     .replace(/{{TITLE}}/g, job.title)
     .replace(/{{META_DESCRIPTION}}/g, `Apply Online for ${job.title}. Get total vacancies, age limits, syllabus outline, fees, and guidelines.`)
-    .replace(/{{META_KEYWORDS}}/g, `${job.shortTitle}, ${job.department}, govt jobs 2026, sarkari result, eligibility, salary`)
+    .replace(/{{META_KEYWORDS}}/g, `${job.shortTitle}, ${job.department}, govt jobs 2026, sarkari result, eligibility, salary, job vacancies alert`)
     .replace(/{{JSON_LD_SCHEMA}}/g, schemaHtml)
     .replace(/{{DEPT}}/g, job.department)
     .replace(/{{POST_DATE}}/g, formatDate(job.postDate))
@@ -469,7 +786,7 @@ exams.forEach(job => {
   fs.writeFileSync(path.join(jobsDir, `${job.id}.html`), outputHtml, 'utf8');
 });
 
-console.log(`Successfully generated 50 static HTML postings inside jobs/ directory.`);
+console.log(`Successfully generated ${exams.length} static HTML postings inside jobs/ directory.`);
 
 // 12. Regenerate assets/js/data.js with simplified index summaries
 const announcementsList = [
@@ -545,6 +862,10 @@ const yojanaList = [
 
 const jsOutput = `// Auto-generated Government Jobs Portal database index
 const portalData = {
+  config: {
+    telegramUrl: "https://t.me/jobvacanciesalert",
+    whatsappUrl: "https://chat.whatsapp.com/invite/placeholder"
+  },
   items: ${JSON.stringify(simplifiedItems, null, 2)},
   yojana: ${JSON.stringify(yojanaList, null, 2)},
   announcements: ${JSON.stringify(announcementsList, null, 2)}
@@ -637,7 +958,7 @@ exams.forEach(job => {
 
 xmlOutput += `</urlset>`;
 fs.writeFileSync(sitemapXmlPath, xmlOutput, 'utf8');
-console.log(`Successfully generated sitemap.xml with 50 job entries.`);
+console.log(`Successfully generated sitemap.xml with ${exams.length} job entries.`);
 
 // 14. Helper Date Formatter
 function formatDate(dateStr) {

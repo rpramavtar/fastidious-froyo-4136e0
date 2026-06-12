@@ -628,8 +628,75 @@ input, button, select, textarea {
 
 .grid-box-list {
   padding: 8px 0;
+  max-height: 400px;
   overflow-y: auto;
   flex-grow: 1;
+  scrollbar-width: thin;
+}
+
+.grid-box-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.grid-box-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.grid-box-list::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 3px;
+}
+
+.grid-box-search {
+  padding: 8px 12px;
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.column-search-input {
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 13px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  outline: none;
+  transition: var(--transition);
+}
+
+.column-search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-glow);
+}
+
+.grid-box-footer {
+  padding: 10px 16px;
+  background-color: var(--bg-tertiary);
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.column-view-all {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.column-view-all:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.category-items-list {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 .grid-item-link {
@@ -1263,3 +1330,139 @@ textarea.form-control {
     text-align: center;
   }
 }
+
+/* Floating Social Join Bar */
+.floating-join-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: var(--glass-bg);
+  border-top: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  box-shadow: 0 -8px 32px rgba(18, 28, 53, 0.08);
+  padding: 12px 20px;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.join-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.join-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.join-bell {
+  font-size: 18px;
+  animation: bellRing 2s infinite ease-in-out;
+  display: inline-block;
+  transform-origin: top center;
+}
+
+@keyframes bellRing {
+  0%, 100% { transform: rotate(0); }
+  15% { transform: rotate(15deg); }
+  30% { transform: rotate(-12deg); }
+  45% { transform: rotate(10deg); }
+  60% { transform: rotate(-8deg); }
+  75% { transform: rotate(4deg); }
+  90% { transform: rotate(-2deg); }
+}
+
+.join-text {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.join-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.join-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  transition: var(--transition);
+}
+
+.btn-telegram {
+  background: hsl(200, 85%, 50%);
+}
+
+.btn-telegram:hover {
+  background: hsl(200, 85%, 43%);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.btn-whatsapp {
+  background: hsl(142, 70%, 45%);
+}
+
+.btn-whatsapp:hover {
+  background: hsl(142, 70%, 38%);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.join-close-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 8px;
+  transition: var(--transition);
+}
+
+.join-close-btn:hover {
+  color: var(--danger);
+  transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .join-bar-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  .join-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+  .join-close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+  body {
+    padding-bottom: 80px; /* prevent overlap */
+  }
+}
+

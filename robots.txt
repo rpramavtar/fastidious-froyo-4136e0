@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /category.html
+Allow: /yojana.html
+Allow: /jobs/
+Disallow: /scripts/
+
+Sitemap: https://jobvacanciesalert.com/sitemap.xml

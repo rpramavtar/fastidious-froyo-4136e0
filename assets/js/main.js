@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initMobileMenu();
   initTicker();
+  initFloatingJoinBar();
 
   // Determine current page and initialize features
   const path = window.location.pathname;
@@ -15,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     initJobDetailPage();
   } else if (page === "yojana.html") {
     initYojanaPage();
+  } else if (page === "category.html") {
+    initCategoryPage();
   }
 });
 
@@ -87,11 +90,11 @@ function initHomepage() {
   initSearch();
 
   // 3. Populate Sarkari Result Style Grids
-  populateGrid("latestJobsList", data.items.filter(item => item.category === "Latest Jobs"));
-  populateGrid("admitCardList", data.items.filter(item => item.category === "Admit Card"));
-  populateGrid("resultList", data.items.filter(item => item.category === "Result"));
-  populateGrid("answerKeyList", data.items.filter(item => item.category === "Answer Key"));
-  populateGrid("syllabusList", data.items.filter(item => item.category === "Syllabus"));
+  populateGrid("latestJobsList", data.items.filter(item => item.category === "Latest Jobs").slice(0, 10));
+  populateGrid("admitCardList", data.items.filter(item => item.category === "Admit Card").slice(0, 10));
+  populateGrid("resultList", data.items.filter(item => item.category === "Result").slice(0, 10));
+  populateGrid("answerKeyList", data.items.filter(item => item.category === "Answer Key").slice(0, 10));
+  populateGrid("syllabusList", data.items.filter(item => item.category === "Syllabus").slice(0, 10));
   
   // Yojana grid on home
   const yojanaList = document.getElementById("yojanaList");
@@ -115,7 +118,7 @@ function initHomepage() {
     const centralJobs = data.items.filter(item => 
       ["UPSC", "SSC", "Railway", "Banking", "Central"].includes(item.subCategory)
     );
-    populateGrid("centralList", centralJobs);
+    populateGrid("centralList", centralJobs.slice(0, 10));
   }
 
   // State Jobs grid
@@ -124,7 +127,7 @@ function initHomepage() {
     const stateJobs = data.items.filter(item => 
       item.subCategory === "State Wise" || item.state !== "All India"
     );
-    populateGrid("stateList", stateJobs);
+    populateGrid("stateList", stateJobs.slice(0, 10));
   }
 
   // Important Notifications grid
@@ -140,6 +143,26 @@ function initHomepage() {
         </div>
       `).join("");
   }
+
+  // Initialize Column-Specific Search Inputs
+  document.querySelectorAll(".column-search-input").forEach(input => {
+    input.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const listId = e.target.getAttribute("data-list-id");
+      const listContainer = document.getElementById(listId);
+      if (!listContainer) return;
+
+      const items = listContainer.querySelectorAll(".grid-item-link");
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(query)) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  });
 }
 
 function populateGrid(elementId, itemsList) {
@@ -574,6 +597,102 @@ function injectJobSchema(job) {
 }
 
 /* ==========================================================================
+   CATEGORY LIST ARCHIVE PAGE CONTROLLER
+   ========================================================================== */
+function initCategoryPage() {
+  const data = window.portalData;
+  if (!data) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const typeParam = urlParams.get("type");
+
+  if (!typeParam) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  // Map type param to category names
+  const categoryMap = {
+    "latest-jobs": { name: "Latest Jobs", title: "Latest Government Jobs" },
+    "admit-card": { name: "Admit Card", title: "Exam Admit Cards" },
+    "result": { name: "Result", title: "Written Exam Results" },
+    "answer-key": { name: "Answer Key", title: "Official Answer Keys" },
+    "syllabus": { name: "Syllabus", title: "Exam Syllabus Outlines" },
+    "central-jobs": { name: "Central", title: "Central Government Jobs" },
+    "state-jobs": { name: "State Wise", title: "State-wise Government Jobs" }
+  };
+
+  const config = categoryMap[typeParam.toLowerCase()];
+  if (!config) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  // Update title and subtitles
+  document.getElementById("categoryTitle").innerText = config.title;
+
+  // Filter items
+  let filteredItems = [];
+  if (typeParam === "central-jobs") {
+    filteredItems = data.items.filter(item => 
+      ["UPSC", "SSC", "Railway", "Banking", "Central"].includes(item.subCategory)
+    );
+  } else if (typeParam === "state-jobs") {
+    filteredItems = data.items.filter(item => 
+      item.subCategory === "State Wise" || item.state !== "All India"
+    );
+  } else {
+    filteredItems = data.items.filter(item => item.category === config.name);
+  }
+
+  // Update subtitle with count
+  document.getElementById("categorySubtitle").innerText = `Browse all active updates. Total postings: ${filteredItems.length}`;
+
+  const listContainer = document.getElementById("categoryItemsList");
+  if (!listContainer) return;
+
+  function renderList(items) {
+    if (items.length === 0) {
+      listContainer.innerHTML = `<div style="padding: 30px; text-align: center; color: var(--text-muted);">No matching entries found.</div>`;
+      return;
+    }
+
+    listContainer.innerHTML = items
+      .map(item => {
+        const showBadge = item.isTrending ? '<span class="badge-new">New</span>' : '';
+        return `
+          <a href="jobs/${item.id}.html" class="grid-item-link">
+            <span class="grid-item-left">
+              ${showBadge}
+              ${item.title}
+            </span>
+            <span class="grid-item-meta">${formatDate(item.postDate)}</span>
+          </a>
+        `;
+      })
+      .join("");
+  }
+
+  // Initial render
+  renderList(filteredItems);
+
+  // Search filter capability
+  const searchInput = document.getElementById("categorySearchInput");
+  if (searchInput) {
+    searchInput.placeholder = `Search within ${config.title}...`;
+    searchInput.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const matched = filteredItems.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.department.toLowerCase().includes(query) ||
+        item.shortTitle.toLowerCase().includes(query)
+      );
+      renderList(matched);
+    });
+  }
+}
+
+/* ==========================================================================
    HELPER UTILITIES
    ========================================================================== */
 function formatDate(dateStr) {
@@ -586,4 +705,48 @@ function formatDate(dateStr) {
     month: "short",
     year: "numeric"
   });
+}
+
+/* ==========================================================================
+   FLOATING SOCIAL JOIN BAR
+   ========================================================================== */
+function initFloatingJoinBar() {
+  const config = window.portalData?.config;
+  if (!config) return;
+
+  const joinBar = document.createElement("div");
+  joinBar.className = "floating-join-bar";
+  joinBar.innerHTML = `
+    <div class="join-bar-inner">
+      <div class="join-bar-left">
+        <span class="join-bell">🔔</span>
+        <span class="join-text">Get Instant Job Alerts on Mobile!</span>
+      </div>
+      <div class="join-buttons">
+        <a href="${config.telegramUrl}" target="_blank" rel="noopener noreferrer" class="join-btn btn-telegram">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.97-.74 3.79-1.65 6.32-2.73 7.57-3.26 3.6-1.5 4.35-1.76 4.84-1.77.11 0 .35.03.5.16.13.12.17.28.18.39 0 .07.01.22 0 .28z"/>
+          </svg>
+          Telegram
+        </a>
+        <a href="${config.whatsappUrl}" target="_blank" rel="noopener noreferrer" class="join-btn btn-whatsapp">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.982L2 22l5.233-1.371a9.994 9.994 0 004.78 1.217h.005c5.505 0 9.99-4.478 9.99-9.984 0-2.67-1.037-5.178-2.927-7.067C17.185 2.92 14.685 2.002 12.012 2zm0 1.66c2.227 0 4.321.867 5.9 2.446 1.579 1.58 2.449 3.674 2.45 5.9a8.307 8.307 0 01-8.35 8.322 8.28 8.28 0 01-4.223-1.157l-.304-.18-3.136.82.835-3.057-.197-.314a8.275 8.275 0 01-1.265-4.43c0-4.59 3.743-8.324 8.35-8.324zm4.876 11.238c-.268-.135-1.58-.78-1.823-.867-.243-.088-.419-.13-.596.135-.176.265-.683.867-.838 1.04-.155.176-.309.2-.577.066-.268-.135-1.132-.418-2.158-1.336-.798-.713-1.336-1.593-1.493-1.861-.157-.268-.017-.414.117-.547.12-.12.268-.313.402-.47.135-.156.18-.268.27-.447.089-.178.044-.335-.022-.47-.066-.135-.596-1.436-.816-1.968-.215-.519-.462-.449-.636-.458l-.543-.008c-.187 0-.49.07-.747.353-.257.283-.98.96-.98 2.34 0 1.38 1.002 2.716 1.14 2.9.14.187 1.972 3.012 4.777 4.22.667.287 1.189.459 1.595.589.67.213 1.28.183 1.763.11.538-.08 1.58-.646 1.8-.1.22-.596.22-1.106.155-1.194-.066-.089-.243-.135-.512-.27z"/>
+          </svg>
+          WhatsApp
+        </a>
+        <button class="join-close-btn" id="closeJoinBar">✕</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(joinBar);
+
+  document.getElementById("closeJoinBar").addEventListener("click", () => {
+    joinBar.style.display = "none";
+    sessionStorage.setItem("joinBarClosed", "true");
+  });
+
+  if (sessionStorage.getItem("joinBarClosed") === "true") {
+    joinBar.style.display = "none";
+  }
 }
