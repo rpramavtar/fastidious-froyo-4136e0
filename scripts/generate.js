@@ -722,16 +722,20 @@ exams.forEach(job => {
         "validThrough": `${job.lastDate}T23:59:00+05:30`,
         "employmentType": "FULL_TIME",
         "hiringOrganization": {
-          "@type": "GovernmentOrganization",
+          "@type": "Organization",
           "name": job.department,
-          "sameAs": "https://jobvacanciesalert.com"
+          "sameAs": "https://jobvacanciesalert.com",
+          "logo": "https://jobvacanciesalert.com/assets/logo.png"
         },
         "jobLocation": {
           "@type": "Place",
           "address": {
             "@type": "PostalAddress",
             "addressCountry": "IN",
-            "addressRegion": job.state
+            "addressRegion": job.state,
+            "addressLocality": job.state === "All India" ? "New Delhi" : "State Capital",
+            "postalCode": "110001",
+            "streetAddress": "Government Exam Centers"
           }
         },
         "baseSalary": {
