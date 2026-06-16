@@ -243,6 +243,148 @@ const remainingExams = [
   { id: "bihar-cdpo-2026", name: "Bihar BPSC Child Development Officer CDPO", dept: "Bihar Public Service Commission (BPSC)", cat: "Syllabus", sub: "State Wise", vac: 55, fee: "₹600 for Gen, ₹150 Reserves", sal: "Starting basic pay ₹53,100 (Level 9 Pay scale)", age: "21-37 Years (Males), 40 (Females)", qual: "Graduation in any stream." }
 ];
 
+// Dynamically generate 200 additional realistic exams
+const extraStates = [
+  { name: "Uttar Pradesh", code: "up", boards: [{ name: "UPSSSC", full: "Uttar Pradesh Subordinate Services Selection Commission" }, { name: "UPPRPB", full: "Uttar Pradesh Police Recruitment Board" }, { name: "UPPSC", full: "Uttar Pradesh Public Service Commission" }] },
+  { name: "Bihar", code: "bihar", boards: [{ name: "BSSC", full: "Bihar Staff Selection Commission" }, { name: "BPSSC", full: "Bihar Police Subordinate Services Commission" }, { name: "BPSC", full: "Bihar Public Service Commission" }] },
+  { name: "Rajasthan", code: "rajasthan", boards: [{ name: "RSMSSB", full: "Rajasthan Staff Selection Board" }, { name: "RPSC", full: "Rajasthan Public Service Commission" }] },
+  { name: "Madhya Pradesh", code: "mp", boards: [{ name: "MPESB", full: "Madhya Pradesh Employees Selection Board" }, { name: "MPPSC", full: "Madhya Pradesh Public Service Commission" }] },
+  { name: "Haryana", code: "haryana", boards: [{ name: "HSSC", full: "Haryana Staff Selection Commission" }, { name: "HPSC", full: "Haryana Public Service Commission" }] },
+  { name: "West Bengal", code: "wb", boards: [{ name: "WBPSC", full: "West Bengal Public Service Commission" }, { name: "WBPPRB", full: "West Bengal Police Recruitment Board" }] },
+  { name: "Maharashtra", code: "maha", boards: [{ name: "MPSC", full: "Maharashtra Public Service Commission" }] },
+  { name: "Gujarat", code: "gujarat", boards: [{ name: "GPSC", full: "Gujarat Public Service Commission" }, { name: "GSSSB", full: "Gujarat Subordinate Service Selection Board" }] },
+  { name: "Jharkhand", code: "jh", boards: [{ name: "JSSC", full: "Jharkhand Staff Selection Commission" }, { name: "JPSC", full: "Jharkhand Public Service Commission" }] },
+  { name: "Uttarakhand", code: "uk", boards: [{ name: "UKSSSC", full: "Uttarakhand Subordinate Services Selection Commission" }, { name: "UKPSC", full: "Uttarakhand Public Service Commission" }] },
+  { name: "Odisha", code: "odisha", boards: [{ name: "OSSSC", full: "Odisha Subordinate Staff Selection Commission" }, { name: "OPSC", full: "Odisha Public Service Commission" }] },
+  { name: "Chhattisgarh", code: "cg", boards: [{ name: "CGVYAPAM", full: "Chhattisgarh Professional Examination Board" }, { name: "CGPSC", full: "Chhattisgarh Public Service Commission" }] }
+];
+
+const extraCentralDepts = [
+  { name: "Staff Selection Commission (SSC)", sub: "SSC", prefix: "ssc" },
+  { name: "Union Public Service Commission (UPSC)", sub: "UPSC", prefix: "upsc" },
+  { name: "Railway Recruitment Boards (RRB)", sub: "Railway", prefix: "rrb" },
+  { name: "Institute of Banking Personnel Selection (IBPS)", sub: "Banking", prefix: "ibps" },
+  { name: "State Bank of India (SBI)", sub: "Banking", prefix: "sbi" },
+  { name: "Reserve Bank of India (RBI)", sub: "Banking", prefix: "rbi" },
+  { name: "Food Corporation of India (FCI)", sub: "Central", prefix: "fci" },
+  { name: "Indian Space Research Organisation (ISRO)", sub: "Central", prefix: "isro" },
+  { name: "Defence Research and Development Organisation (DRDO)", sub: "Central", prefix: "drdo" },
+  { name: "Employees' Provident Fund Organisation (EPFO)", sub: "Central", prefix: "epfo" },
+  { name: "Life Insurance Corporation of India (LIC)", sub: "Banking", prefix: "lic" },
+  { name: "Employees' State Insurance Corporation (ESIC)", sub: "Central", prefix: "esic" },
+  { name: "Intelligence Bureau (IB)", sub: "Central", prefix: "ib" },
+  { name: "Department of Posts (India Post)", sub: "Central", prefix: "post" },
+  { name: "National Bank for Agriculture and Rural Development (NABARD)", sub: "Banking", prefix: "nabard" },
+  { name: "Securities and Exchange Board of India (SEBI)", sub: "Banking", prefix: "sebi" },
+  { name: "Small Industries Development Bank of India (SIDBI)", sub: "Banking", prefix: "sidbi" },
+  { name: "National Highways Authority of India (NHAI)", sub: "Central", prefix: "nhai" },
+  { name: "Oil and Natural Gas Corporation (ONGC)", sub: "Central", prefix: "ongc" },
+  { name: "Indian Oil Corporation Limited (IOCL)", sub: "Central", prefix: "iocl" },
+  { name: "Steel Authority of India Limited (SAIL)", sub: "Central", prefix: "sail" },
+  { name: "Bhabha Atomic Research Centre (BARC)", sub: "Central", prefix: "barc" }
+];
+
+const extraPostNames = [
+  { title: "Assistant Section Officer ASO", vac: 950, sal: "Pay Level 7 (₹44,900 - ₹1,42,400)", qual: "Bachelor's Degree in any stream.", fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female" },
+  { title: "Upper Division Clerk UDC", vac: 1200, sal: "Pay Level 4 (₹25,500 - ₹81,100)", qual: "Graduation in any stream + basic computer skills.", fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female" },
+  { title: "Lower Division Clerk LDC", vac: 2400, sal: "Pay Level 2 (₹19,900 - ₹63,200)", qual: "12th Class Pass + typing speed of 35 wpm in English.", fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female" },
+  { title: "Multi Tasking Staff MTS", vac: 3800, sal: "Pay Level 1 (₹18,000 - ₹56,900)", qual: "10th Class Pass (Matriculation) from recognized board.", fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female" },
+  { title: "Junior Engineer JE Civil/Electrical", vac: 850, sal: "Pay Level 6 (₹35,400 - ₹1,12,400)", qual: "Diploma or Degree in Engineering in relevant branch.", fee: "₹200 for Gen/OBC, ₹0 SC/ST/Female" },
+  { title: "Senior Section Engineer SSE", vac: 450, sal: "Pay Level 7 (₹44,900 - ₹1,42,400)", qual: "B.E. / B.Tech in Engineering in relevant stream.", fee: "₹500 for Gen/OBC, ₹250 reserves" },
+  { title: "Stenographer Grade C & D", vac: 620, sal: "Level 4 / Level 6 Pay Matrix", qual: "12th Class Pass + Stenography test qualification.", fee: "₹100 for Gen/OBC, ₹0 SC/ST/Female" },
+  { title: "Technical Assistant", vac: 730, sal: "Pay Level 5 (₹29,200 - ₹92,300)", qual: "B.Sc or Diploma in Engineering in relevant field.", fee: "₹100 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Scientific Assistant", vac: 340, sal: "Pay Level 6 (₹35,400 - ₹1,12,400)", qual: "Bachelor's Degree in Science (B.Sc) with Physics/Computer Science.", fee: "₹100 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Security Guard / Watchman", vac: 1800, sal: "Pay Level 1 (₹18,000 - ₹56,900)", qual: "10th Class Pass from recognized board.", fee: "₹100 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Officer Trainee", vac: 500, sal: "Pay Level 10 (₹56,100 - ₹1,77,500)", qual: "Post Graduation or Professional Degree in relevant field.", fee: "₹500 for Gen/OBC, ₹100 reserves" },
+  { title: "Technical Officer", vac: 230, sal: "Pay Level 10 (₹56,100 - ₹1,77,500)", qual: "B.E. / B.Tech or M.Sc in relevant scientific stream.", fee: "₹500 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Junior Assistant", vac: 1100, sal: "Pay Level 3 (₹21,700 - ₹69,100)", qual: "Bachelor's degree in any discipline + computer typing.", fee: "₹100 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Data Entry Operator DEO", vac: 870, sal: "Pay Level 4 (₹25,500 - ₹81,100)", qual: "12th Class Pass with speed of 8000 key depressions per hour.", fee: "₹100 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Accounts Officer", vac: 150, sal: "Pay Level 10 (₹56,100 - ₹1,77,500)", qual: "CA / ICWA / MBA Finance or M.Com from recognized University.", fee: "₹800 for Gen/OBC" },
+  { title: "Personal Assistant PA", vac: 450, sal: "Pay Level 6 (₹35,400 - ₹1,12,400)", qual: "Graduation + Stenography typing speed 100 wpm.", fee: "₹100 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Staff Nurse Grade II", vac: 1250, sal: "Pay Level 7 (₹44,900 - ₹1,42,400)", qual: "B.Sc Nursing or General Nursing & Midwifery (GNM).", fee: "₹300 for Gen/OBC" },
+  { title: "Pharmacist", vac: 430, sal: "Pay Level 5 (₹29,200 - ₹92,300)", qual: "Diploma or Degree in Pharmacy (D.Pharm/B.Pharm) + registered.", fee: "₹100 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Lab Assistant", vac: 680, sal: "Pay Level 3 (₹21,700 - ₹69,100)", qual: "12th Class Pass in Science stream from recognized board.", fee: "₹100 for Gen/OBC, ₹0 SC/ST" },
+  { title: "Executive Trainee", vac: 320, sal: "Pay Level 10 (₹56,100 - ₹1,77,500)", qual: "First class B.E. / B.Tech or PG Degree with GATE score.", fee: "₹500 for Gen/OBC" }
+];
+
+const extraStatePosts = [
+  { title: "Constable GD Recruitment", vac: 15000, sal: "Pay Level 3 (₹21,700 - ₹69,100)", qual: "10th Class Pass from recognized board.", fee: "₹400 for all candidates" },
+  { title: "Sub Inspector SI Uniform Post", vac: 1800, sal: "Pay Level 6 (₹35,400 - ₹1,12,400)", qual: "Bachelor's Degree in any stream.", fee: "₹400 for all candidates" },
+  { title: "Lekhpal / Patwari Revenue Officer", vac: 4500, sal: "Pay Level 2 (₹19,900 - ₹63,200)", qual: "12th Class Pass + Computer CCC certificate.", fee: "₹250 for Gen/OBC, ₹100 reserves" },
+  { title: "Forest Guard & Van Daroga", vac: 2100, sal: "Pay Level 2 (₹19,900 - ₹63,200)", qual: "12th Class Pass + physical fitness requirements.", fee: "₹250 for Gen/OBC, ₹100 reserves" },
+  { title: "Assistant Teacher Primary Education", vac: 12500, sal: "Starting basic pay ₹35,400 per month plus perks", qual: "Graduation + B.Ed / D.El.Ed + State Teacher Eligibility Test (TET).", fee: "₹600 for Gen/OBC, ₹400 SC/ST" },
+  { title: "Computer Operator & Programmer Grade A", vac: 930, sal: "Pay Level 4 (₹25,500 - ₹81,100)", qual: "12th Pass with Physics & Math + 'O' Level diploma in Computers.", fee: "₹400 for all candidates" },
+  { title: "Revenue Inspector Kanungo", vac: 640, sal: "Pay Level 5 (₹29,200 - ₹92,300)", qual: "Bachelor's Degree in Commerce or Economics preferred.", fee: "₹250 for Gen/OBC" },
+  { title: "Junior Assistant & Typing Typist", vac: 3200, sal: "Pay Level 2 (₹19,900 - ₹63,200)", qual: "12th Class Pass + Hindi/English typing certificate.", fee: "₹185 for Gen/OBC, ₹95 SC/ST" },
+  { title: "Block Development Officer BDO", vac: 120, sal: "Level 10 Pay Matrix starting ₹56,100 basic pay", qual: "Graduation in any stream from recognized University.", fee: "₹600 for Gen/OBC, ₹150 reserves" },
+  { title: "Agriculture Technical Assistant", vac: 1400, sal: "Pay Level 4 (₹25,500 - ₹81,100)", qual: "B.Sc in Agriculture or Horticulture.", fee: "₹185 for Gen/OBC, ₹95 SC/ST" },
+  { title: "Revenue Inspector RI", vac: 580, sal: "Pay Level 5 (₹29,200 - ₹92,300)", qual: "Bachelor's Degree in Science/Commerce/Arts.", fee: "₹250 for Gen/OBC, ₹100 reserves" },
+  { title: "Junior Stenographer", vac: 340, sal: "Pay Level 4 (₹25,500 - ₹81,100)", qual: "12th Class Pass + Stenography shorthand speed of 80 wpm.", fee: "₹200 for all candidates" },
+  { title: "Technical Clerk", vac: 820, sal: "Pay Level 2 (₹19,900 - ₹63,200)", qual: "12th Class Pass + basic computer operating certificate.", fee: "₹150 for Gen/OBC" },
+  { title: "Warder Jailor Recruitment", vac: 1100, sal: "Pay Level 3 (₹21,700 - ₹69,100)", qual: "12th Class Pass + physical standard metrics.", fee: "₹400 for all candidates" },
+  { title: "Excise Sub Inspector", vac: 230, sal: "Pay Level 6 (₹35,400 - ₹1,12,400)", qual: "Bachelor's Degree in any discipline from recognized University.", fee: "₹400 for all candidates" },
+  { title: "Assistant Engineer AE Civil/Electrical", vac: 410, sal: "Pay Level 10 (₹56,100 - ₹1,77,500)", qual: "Degree in Engineering (B.E. / B.Tech) in relevant discipline.", fee: "₹600 for Gen/OBC, ₹150 reserves" },
+  { title: "Accountant Accounts Clerk", vac: 1500, sal: "Pay Level 4 (₹25,500 - ₹81,100)", qual: "Bachelor's Degree in Commerce (B.Com) from recognized University.", fee: "₹250 for Gen/OBC, ₹100 SC/ST" },
+  { title: "Motor Vehicle Inspector MVI", vac: 180, sal: "Pay Level 6 (₹35,400 - ₹1,12,400)", qual: "Diploma in Automobile/Mechanical Engineering + Driving License.", fee: "₹400 for Gen/OBC" },
+  { title: "Statistical Assistant", vac: 320, sal: "Pay Level 5 (₹29,200 - ₹92,300)", qual: "Master's Degree in Statistics or Mathematics or Economics.", fee: "₹250 for Gen/OBC, ₹100 reserves" },
+  { title: "Librarian Grade III", vac: 470, sal: "Pay Level 5 (₹29,200 - ₹92,300)", qual: "Graduation + Diploma/Degree in Library Science (C.Lib/B.Lib).", fee: "₹300 for Gen/OBC" }
+];
+
+const categories = ["Latest Jobs", "Admit Card", "Result", "Answer Key", "Syllabus"];
+
+// Generate 200 Central jobs
+let extraCount = 0;
+extraCentralDepts.forEach((dept, deptIdx) => {
+  extraPostNames.forEach((post, postIdx) => {
+    extraCount++;
+    if (extraCount > 200) return; // limit to 200
+    
+    const cat = categories[extraCount % 5];
+    const id = `${dept.prefix}-${post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-2026`;
+    
+    remainingExams.push({
+      id: id,
+      name: `${dept.name} ${post.title}`,
+      dept: dept.name,
+      cat: cat,
+      sub: dept.sub,
+      vac: cat === "Admit Card" || cat === "Syllabus" || cat === "Answer Key" ? 0 : post.vac,
+      fee: post.fee,
+      sal: post.sal,
+      age: "18-27 Years (Age relaxation applicable as per rules)",
+      qual: post.qual
+    });
+  });
+});
+
+// Generate 200 State jobs
+let extraStateCount = 0;
+extraStates.forEach(state => {
+  state.boards.forEach(board => {
+    extraStatePosts.forEach(post => {
+      extraStateCount++;
+      if (extraStateCount > 200) return; // limit to 200
+      
+      const cat = categories[(extraStateCount + 2) % 5];
+      const id = `${state.code}-${board.name.toLowerCase()}-${post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-2026`;
+      
+      remainingExams.push({
+        id: id,
+        name: `${state.name} ${board.name} ${post.title}`,
+        dept: `${board.full} (${board.name}), Government of ${state.name}`,
+        cat: cat,
+        sub: "State Wise",
+        vac: cat === "Admit Card" || cat === "Syllabus" || cat === "Answer Key" ? 0 : post.vac,
+        fee: post.fee,
+        sal: post.sal,
+        age: "18-40 Years (Age relaxation applicable for state residents)",
+        qual: post.qual
+      });
+    });
+  });
+});
+
+
 // Helper to format dates to text
 const defaultDates = {
   "Apply Start": "11/06/2026",
@@ -317,7 +459,7 @@ function getOfficialLinks(job) {
     officialUrl = "https://upsc.gov.in";
     applyUrl = "https://upsconline.nic.in";
     notificationUrl = "https://upsc.gov.in/examinations/active-exams";
-  } else if (id.includes("ssc") || dept.includes("staff selection commission")) {
+  } else if ((id.includes("ssc") && !id.includes("upsssc") && !id.includes("hssc") && !id.includes("jssc") && !id.includes("rsssb") && !id.includes("rsmssb") && !id.includes("uksssc") && !id.includes("bssc")) || dept.includes("staff selection commission")) {
     officialUrl = "https://ssc.gov.in";
     applyUrl = "https://ssc.gov.in";
     notificationUrl = "https://ssc.gov.in";
@@ -565,6 +707,50 @@ function getOfficialLinks(job) {
     officialUrl = "https://gseb.org";
     applyUrl = "https://gseb.org";
     notificationUrl = "https://gseb.org";
+  } else if (id.includes("esic")) {
+    officialUrl = "https://esic.gov.in";
+    applyUrl = "https://esic.gov.in";
+    notificationUrl = "https://esic.gov.in";
+  } else if (id.includes("ib")) {
+    officialUrl = "https://mha.gov.in";
+    applyUrl = "https://mha.gov.in";
+    notificationUrl = "https://mha.gov.in";
+  } else if (id.includes("ongc")) {
+    officialUrl = "https://ongcindia.com";
+    applyUrl = "https://ongcindia.com";
+    notificationUrl = "https://ongcindia.com";
+  } else if (id.includes("iocl")) {
+    officialUrl = "https://iocl.com";
+    applyUrl = "https://iocl.com";
+    notificationUrl = "https://iocl.com";
+  } else if (id.includes("sail")) {
+    officialUrl = "https://sail.co.in";
+    applyUrl = "https://sail.co.in";
+    notificationUrl = "https://sail.co.in";
+  } else if (id.includes("barc")) {
+    officialUrl = "https://barc.gov.in";
+    applyUrl = "https://barc.gov.in";
+    notificationUrl = "https://barc.gov.in";
+  } else if (id.includes("jpsc")) {
+    officialUrl = "https://jpsc.gov.in";
+    applyUrl = "https://jpsc.gov.in";
+    notificationUrl = "https://jpsc.gov.in";
+  } else if (id.includes("osssc")) {
+    officialUrl = "https://osssc.gov.in";
+    applyUrl = "https://osssc.gov.in";
+    notificationUrl = "https://osssc.gov.in";
+  } else if (id.includes("cgpsc")) {
+    officialUrl = "https://psc.cg.gov.in";
+    applyUrl = "https://psc.cg.gov.in";
+    notificationUrl = "https://psc.cg.gov.in";
+  } else if (id.includes("cgvyapam")) {
+    officialUrl = "https://vyapam.cgstate.gov.in";
+    applyUrl = "https://vyapam.cgstate.gov.in";
+    notificationUrl = "https://vyapam.cgstate.gov.in";
+  } else if (id.includes("sebi")) {
+    officialUrl = "https://sebi.gov.in";
+    applyUrl = "https://sebi.gov.in";
+    notificationUrl = "https://sebi.gov.in";
   }
 
   return { officialUrl, applyUrl, notificationUrl };
@@ -711,52 +897,68 @@ exams.forEach(job => {
     .join('\n');
 
   // 10. Compile JSON-LD Structured Data Schema (Google Jobs Crawler optimization)
-  const jobSchema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "JobPosting",
-        "title": job.title,
-        "description": `Official notification details for ${job.title}. Department: ${job.department}. Qualification requirement: ${job.qualification}. Basic salary: ${job.basicSalary}. Check application dates, eligibility, and direct apply link details in the page.`,
-        "datePosted": `${job.postDate}T09:00:00+05:30`,
-        "validThrough": `${job.lastDate}T23:59:00+05:30`,
-        "employmentType": "FULL_TIME",
-        "hiringOrganization": {
-          "@type": "Organization",
-          "name": job.department,
-          "sameAs": "https://jobvacanciesalert.com",
-          "logo": "https://jobvacanciesalert.com/assets/logo.png"
-        },
-        "jobLocation": {
-          "@type": "Place",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "IN",
-            "addressRegion": job.state,
-            "addressLocality": job.state === "All India" ? "New Delhi" : "State Capital",
-            "postalCode": "110001",
-            "streetAddress": "Government Exam Centers"
-          }
-        },
-        "baseSalary": {
-          "@type": "MonetaryAmount",
-          "currency": "INR",
-          "value": {
-            "@type": "QuantitativeValue",
-            "value": 35000,
-            "unitText": "MONTH"
-          }
+  const schemaGraph = [
+    {
+      "@type": "JobPosting",
+      "title": job.title,
+      "description": `Official notification details for ${job.title}. Department: ${job.department}. Qualification requirement: ${job.qualification}. Basic salary: ${job.basicSalary}. Check application dates, eligibility, and direct apply link details in the page.`,
+      "datePosted": `${job.postDate}T09:00:00+05:30`,
+      "validThrough": `${job.lastDate}T23:59:00+05:30`,
+      "employmentType": "FULL_TIME",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": job.department,
+        "sameAs": "https://jobvacanciesalert.com",
+        "logo": "https://jobvacanciesalert.com/assets/logo.png"
+      },
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "IN",
+          "addressRegion": job.state,
+          "addressLocality": job.state === "All India" ? "New Delhi" : "State Capital",
+          "postalCode": "110001",
+          "streetAddress": "Government Exam Centers"
         }
       },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jobvacanciesalert.com/index.html" },
-          { "@type": "ListItem", "position": 2, "name": job.category, "item": `https://jobvacanciesalert.com/index.html#${job.category.toLowerCase().replace(/\s+/g, '-')}` },
-          { "@type": "ListItem", "position": 3, "name": job.shortTitle, "item": `https://jobvacanciesalert.com/jobs/${job.id}.html` }
-        ]
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "INR",
+        "value": {
+          "@type": "QuantitativeValue",
+          "value": 35000,
+          "unitText": "MONTH"
+        }
       }
-    ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jobvacanciesalert.com/index.html" },
+        { "@type": "ListItem", "position": 2, "name": job.category, "item": `https://jobvacanciesalert.com/index.html#${job.category.toLowerCase().replace(/\s+/g, '-')}` },
+        { "@type": "ListItem", "position": 3, "name": job.shortTitle, "item": `https://jobvacanciesalert.com/jobs/${job.id}.html` }
+      ]
+    }
+  ];
+
+  if (job.faqs && job.faqs.length > 0) {
+    schemaGraph.push({
+      "@type": "FAQPage",
+      "mainEntity": job.faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
+    });
+  }
+
+  const jobSchema = {
+    "@context": "https://schema.org",
+    "@graph": schemaGraph
   };
 
   const schemaHtml = `<script type="application/ld+json">\n${JSON.stringify(jobSchema, null, 2)}\n</script>`;
@@ -767,6 +969,7 @@ exams.forEach(job => {
     .replace(/{{META_DESCRIPTION}}/g, `Apply Online for ${job.title}. Get total vacancies, age limits, syllabus outline, fees, and guidelines.`)
     .replace(/{{META_KEYWORDS}}/g, `${job.shortTitle}, ${job.department}, govt jobs 2026, sarkari result, eligibility, salary, job vacancies alert`)
     .replace(/{{JSON_LD_SCHEMA}}/g, schemaHtml)
+    .replace(/{{JOB_ID}}/g, job.id)
     .replace(/{{DEPT}}/g, job.department)
     .replace(/{{POST_DATE}}/g, formatDate(job.postDate))
     .replace(/{{LAST_DATE}}/g, formatDate(job.lastDate))
