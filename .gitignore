@@ -1,0 +1,6 @@
+# Dependencies
+node_modules/
+
+# Google Service Account Key Files (Security)
+jobvacanciesalert-*.json
+service_account.json
