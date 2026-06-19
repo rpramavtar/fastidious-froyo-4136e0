@@ -87,14 +87,27 @@ function submitToIndexNow() {
 
 // 4. Submit to Google Indexing API (if service_account.json is present)
 function submitToGoogle() {
-  const serviceAccountPath = path.join(__dirname, '../service_account.json');
+  let serviceAccountPath = path.join(__dirname, '../service_account.json');
   if (!fs.existsSync(serviceAccountPath)) {
-    console.log("\n⚠️  service_account.json not found in root. Skipping Google Indexing API submission.");
-    console.log("ℹ️  To index on Google, place your Service Account key file 'service_account.json' in the root directory and run this script again.");
+    // Dynamically look for any jobvacanciesalert-*.json file in the root
+    const rootDir = path.join(__dirname, '..');
+    try {
+      const files = fs.readdirSync(rootDir);
+      const matchedFile = files.find(f => f.startsWith('jobvacanciesalert-') && f.endsWith('.json'));
+      if (matchedFile) {
+        serviceAccountPath = path.join(rootDir, matchedFile);
+      }
+    } catch (e) {
+      // Fallback
+    }
+  }
+
+  if (!fs.existsSync(serviceAccountPath)) {
+    console.log("\n⚠️  Google Service Account key file not found in root (expected service_account.json or jobvacanciesalert-*.json). Skipping Google Indexing API submission.");
     return;
   }
 
-  console.log("\nSubmitting URLs to Google Indexing API...");
+  console.log(`\nSubmitting URLs to Google Indexing API using key: ${path.basename(serviceAccountPath)}...`);
   
   // Dynamic import of googleapis
   let google;
@@ -106,13 +119,11 @@ function submitToGoogle() {
   }
 
   const key = require(serviceAccountPath);
-  const jwtClient = new google.auth.JWT(
-    key.client_email,
-    null,
-    key.private_key,
-    ['https://www.googleapis.com/auth/indexing'],
-    null
-  );
+  const jwtClient = new google.auth.JWT({
+    email: key.client_email,
+    key: key.private_key,
+    scopes: ['https://www.googleapis.com/auth/indexing']
+  });
 
   jwtClient.authorize(async (err, tokens) => {
     if (err) {
@@ -144,11 +155,19 @@ function submitToGoogle() {
       };
 
       const req = https.request(options, (res) => {
-        if (res.statusCode === 200) {
-          console.log(`[${i + 1}/${limit}] ✅ Submitted to Google: ${url}`);
-        } else {
-          console.log(`[${i + 1}/${limit}] ❌ Failed Google: ${url} (Status: ${res.statusCode})`);
-        }
+        let resBody = '';
+        res.on('data', chunk => resBody += chunk);
+        res.on('end', () => {
+          if (res.statusCode === 200) {
+            console.log(`[${i + 1}/${limit}] ✅ Submitted to Google: ${url}`);
+          } else {
+            console.log(`[${i + 1}/${limit}] ❌ Failed Google: ${url} (Status: ${res.statusCode})`);
+            if (!global.googleErrorLogged) {
+              console.log(`Google API Error details: ${resBody}`);
+              global.googleErrorLogged = true;
+            }
+          }
+        });
       });
 
       req.on('error', (e) => {
