@@ -395,13 +395,147 @@ const defaultDates = {
 };
 
 // Expand remaining exams list into full exam schemas
-remainingExams.forEach(rem => {
-  const customDates = {
-    "Apply Start": defaultDates["Apply Start"],
-    "Last Date to Apply": defaultDates["Last Date to Apply"],
-    "Last Date Pay Fee": defaultDates["Last Date Pay Fee"],
-    "Exam Date": "October-December 2026"
+function getPostSpecificDetails(job) {
+  const title = job.name.toLowerCase();
+  let pattern = "";
+  let syllabus = "";
+  let books = [];
+  
+  if (title.includes("nurse") || title.includes("pharmacist") || title.includes("lab") || title.includes("medical") || title.includes("paramedical")) {
+    pattern = `The medical selection process comprises:
+1. Written Examination (Objective MCQ style) covering Professional Subject knowledge (60 marks) and General Awareness (40 marks).
+2. Document Verification of Professional Registration Certificates.
+3. Medical fitness standard evaluations.`;
+
+    syllabus = `- Professional Subject Knowledge: Human Anatomy, Physiology, Pharmacology basics, General Nursing practices, or Pharmaceutical chemistry based on the trade.
+- General Awareness: Basic general knowledge, current events, and local region updates.
+- Analytical Ability: Simple arithmetic questions, basic logical reasoning.`;
+
+    books = [
+      "'Target High - Staff Nurse Recruitment Exam' by Muthuvenkatachalam S",
+      "'Comprehensive Guide for Pharmacist Exams' by Dr. L. Vikraman",
+      "'Lucent's General Knowledge' for General Awareness sections"
+    ];
+  } else if (title.includes("steno") || title.includes("typist") || title.includes("operator") || title.includes("clerk") || title.includes("assistant") || title.includes("deo") || title.includes("udc") || title.includes("ldc") || title.includes("personal assistant")) {
+    pattern = `The administrative selection process comprises:
+1. Written Examination (Objective MCQ style) testing Language, Reasoning, and Basic Math.
+2. Typing Speed Skill Test on computer keyboard (Hindi/English as specified).
+3. Stenography Shorthand dictation and transcription evaluation (for Stenographers).
+4. Document Verification.`;
+
+    syllabus = `- Language Proficiency: English and Hindi grammar, vocabulary, sentence correction, and comprehension.
+- Computer Literacy: MS Office Suite (Word, Excel, PowerPoint), basic internet concepts, and shortcut keys.
+- Mental Ability: Analogy, series, coding-decoding, and verbal reasoning.
+- Numerical Aptitude: Simplification, percentages, profit & loss, and averages.`;
+
+    books = [
+      "'Objective General English' by S.P. Bakshi",
+      "'Computer Awareness' by Arihant Publications",
+      "'A Modern Approach to Verbal & Non-Verbal Reasoning' by R.S. Aggarwal"
+    ];
+  } else if (title.includes("accounts") || title.includes("auditor") || title.includes("accountant") || title.includes("finance")) {
+    pattern = `The finance cadre selection process comprises:
+1. Written Examination (MCQ) - Part A: Commerce & Accounting (70 marks); Part B: General Studies (30 marks).
+2. Computer proficiency tests (basic spreadsheets and ledger records).
+3. Document Verification.`;
+
+    syllabus = `- Commerce & Accounts: Double-entry system, bank reconciliation statements, auditing principles, income tax basics, and cost accounting.
+- General Studies: Indian Economy, basic general science, and current events.
+- Quantitative Aptitude: Ratio and proportion, simple and compound interest, time & work.`;
+
+    books = [
+      "'Double Entry Bookkeeping' by T.S. Grewal",
+      "'Auditing Principles and Practice' by Ravinder Kumar",
+      "'Indian Economy' by Ramesh Singh"
+    ];
+  } else if (title.includes("engineer") || title.includes("ae") || title.includes("je") || title.includes("technical") || title.includes("scientist") || title.includes("sse") || title.includes("isro") || title.includes("drdo")) {
+    pattern = `The technical/engineering selection process comprises:
+1. Preliminary Examination (General Awareness & Aptitude).
+2. Main Written Exam (Subject-Specific Technical Engineering papers).
+3. Technical Interview / Viva-Voce evaluation (for executive grades).
+4. Document Verification.`;
+
+    syllabus = `- Technical Discipline: Core engineering concepts (Civil / Mechanical / Electrical / Electronics) based on the post trade.
+- General Aptitude: Quantitative reasoning, logical deductions, and data sufficiency.
+- General Awareness: Current technical advancements, national schemes, and general knowledge.`;
+
+    books = [
+      "'Civil/Mechanical/Electrical Engineering Handbook' by Khanna Publishers",
+      "'Quantitative Aptitude for Competitive Examinations' by Dr. R.S. Aggarwal",
+      "'General Knowledge' by Lucent Publications"
+    ];
+  } else if (title.includes("constable") || title.includes("si") || title.includes("guard") || title.includes("warder") || title.includes("police") || title.includes("daroga")) {
+    pattern = `The police/uniformed service selection process comprises:
+1. Written Examination (Objective MCQ) testing GK, Math, and Reasoning.
+2. Physical Standard Test (PST) measuring height and chest expansion.
+3. Physical Efficiency Test (PET) involving timed running and long jump events.
+4. Medical Examination and Document Verification.`;
+
+    syllabus = `- General Knowledge: National history, geography, constitution of India, and police administration details.
+- Numerical & Mental Ability: Percentages, profit & loss, distance-speed-time, and general mathematics.
+- Intelligence Quotient & Reasoning: Analytical reasoning, coding-decoding, and direction sense.`;
+
+    books = [
+      "'Kiran's Police Constable Recruitment Exam Guide'",
+      "'Quantitative Aptitude' by Dr. R.S. Aggarwal",
+      "'Lucent's General Knowledge'"
+    ];
+  } else {
+    // Default/General Posts
+    pattern = `The general selection examination comprises:
+1. Written Examination (Objective MCQ style) testing GK, Quantitative Aptitude, Reasoning, and Language.
+2. Skill Test / Physical Test (where applicable based on department norms).
+3. Document Verification and Final Merit Evaluation.`;
+
+    syllabus = `The standard syllabus is outlined as follows:
+- Quantitative Aptitude: Ratios, averages, percentages, data interpretation.
+- General Intelligence & Reasoning: Analogies, series, blood relations, puzzles.
+- General Awareness: Current affairs, History, Constitution, Science, Geography.
+- Language Skill: Basic grammar, reading comprehension, vocabulary.`;
+
+    books = [
+      "'Quantitative Aptitude for Competitive Examinations' by Dr. R.S. Aggarwal",
+      "'A Modern Approach to Verbal & Non-Verbal Reasoning' by R.S. Aggarwal",
+      "'General Knowledge' by Lucent Publications",
+      "'Objective General English' by S.P. Bakshi"
+    ];
+  }
+  
+  // 2. Generate post-specific FAQs
+  const faqs = [
+    { q: `What is the educational qualification required for ${job.name} 2026?`, a: job.qual },
+    { q: `What is the salary scale offered for ${job.name}?`, a: job.sal },
+    { q: `What is the selection process for ${job.name}?`, a: pattern.split("\n")[0] + " " + (pattern.split("\n")[1] || "") }
+  ];
+
+  // 3. Generate unique dates based on ID characters
+  const idHash = job.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  
+  const startDay = (idHash % 15) + 1; // 1 to 15
+  const startDayStr = startDay < 10 ? `0${startDay}` : `${startDay}`;
+  const applyStart = `${startDayStr}/06/2026`;
+  
+  const endDay = (startDay + 15) % 28 + 1;
+  const endDayStr = endDay < 10 ? `0${endDay}` : `${endDay}`;
+  const lastDate = `${endDayStr}/07/2026`;
+  
+  const payDay = (endDay + 1) % 28 + 1;
+  const payDayStr = payDay < 10 ? `0${payDay}` : `${payDay}`;
+  const lastDatePay = `${payDayStr}/07/2026`;
+  
+  const importantDates = {
+    "Apply Start": applyStart,
+    "Last Date to Apply": lastDate,
+    "Last Date Pay Fee": lastDatePay,
+    "Exam Date": (idHash % 2 === 0) ? "October-November 2026" : "November-December 2026"
   };
+
+  return { pattern, syllabus, books, faqs, importantDates };
+}
+
+// Expand remaining exams list into full exam schemas
+remainingExams.forEach(rem => {
+  const spec = getPostSpecificDetails(rem);
 
   const cleanRem = {
     id: rem.id,
@@ -409,7 +543,7 @@ remainingExams.forEach(rem => {
     shortTitle: rem.name,
     department: rem.dept,
     postDate: "2026-06-11",
-    lastDate: "2026-07-15",
+    lastDate: spec.importantDates["Last Date to Apply"],
     totalVacancies: rem.vac,
     category: rem.cat,
     subCategory: rem.sub,
@@ -417,29 +551,13 @@ remainingExams.forEach(rem => {
     isTrending: rem.vac > 5000,
     basicSalary: rem.sal,
     fee: { "Application Fee": rem.fee, "Payment Mode": "Online credit/debit card, netbanking, UPI" },
-    importantDates: customDates,
+    importantDates: spec.importantDates,
     ageLimit: { "Age Limit": rem.age, "Age Relaxation": "Standard government relaxations (OBC 3 years, SC/ST 5 years)" },
     qualification: rem.qual,
-    examPattern: `The selection examination comprises:
-1. Written Examination (Objective MCQ style) testing GK, Quantitative Aptitude, Reasoning, and Language.
-2. Skill Test / Physical Test (where applicable based on department norms).
-3. Document Verification and Final Merit Evaluation.`,
-    syllabus: `The standard syllabus is outlined as follows:
-- Quantitative Aptitude: Ratios, averages, percentages, data interpretation.
-- General Intelligence & Reasoning: Analogies, series, blood relations, puzzles.
-- General Awareness: Current affairs, History, Constitution, Science, Geography.
-- Language Skill: Basic grammar, reading comprehension, vocabulary.`,
-    books: [
-      "'Quantitative Aptitude for Competitive Examinations' by Dr. R.S. Aggarwal",
-      "'A Modern Approach to Verbal & Non-Verbal Reasoning' by R.S. Aggarwal",
-      "'General Knowledge' by Lucent Publications",
-      "'Objective General English' by S.P. Bakshi"
-    ],
-    faqs: [
-      { q: `What is the educational qualification for ${rem.name}?`, a: rem.qual },
-      { q: `What is the salary scale offered for ${rem.name}?`, a: rem.sal },
-      { q: `How can I pay the examination fee for ${rem.name}?`, a: "The application fee can be paid online via credit/debit cards, internet banking, or mobile UPI." }
-    ]
+    examPattern: spec.pattern,
+    syllabus: spec.syllabus,
+    books: spec.books,
+    faqs: spec.faqs
   };
 
   exams.push(cleanRem);
