@@ -5,5 +5,7 @@ Allow: /category.html
 Allow: /yojana.html
 Allow: /jobs/
 Disallow: /scripts/
+Disallow: */feed/
+Disallow: /feed/
 
 Sitemap: https://jobvacanciesalert.com/sitemap.xml
