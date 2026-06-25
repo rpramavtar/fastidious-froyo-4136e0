@@ -131,13 +131,30 @@ function submitToGoogle() {
       return;
     }
 
-    console.log("✅ Google Auth Successful. Submitting URLs (Note: Google limit is 200 per day by default)...");
+    // Parse command line arguments for offset and limit
+    let offset = 0;
+    let limit = 200;
+    const args = process.argv.slice(2);
+    for (let i = 0; i < args.length; i++) {
+      if (args[i] === '--offset' && args[i + 1]) {
+        offset = parseInt(args[i + 1], 10);
+      }
+      if (args[i] === '--limit' && args[i + 1]) {
+        limit = parseInt(args[i + 1], 10);
+      }
+    }
 
-    // Google API endpoints require individual post requests or batches
-    // We will loop and send up to 200 URLs
-    const limit = Math.min(urls.length, 200);
-    for (let i = 0; i < limit; i++) {
-      const url = urls[i];
+    const targetUrls = urls.slice(offset, offset + limit);
+    console.log(`✅ Google Auth Successful. Submitting URLs (Offset: ${offset}, Limit: ${limit}, Count: ${targetUrls.length})...`);
+
+    if (targetUrls.length === 0) {
+      console.log("No URLs to submit in the specified range.");
+      return;
+    }
+
+    // Google API endpoints require individual post requests
+    for (let i = 0; i < targetUrls.length; i++) {
+      const url = targetUrls[i];
       const payload = JSON.stringify({
         url: url,
         type: 'URL_UPDATED'
@@ -159,9 +176,9 @@ function submitToGoogle() {
         res.on('data', chunk => resBody += chunk);
         res.on('end', () => {
           if (res.statusCode === 200) {
-            console.log(`[${i + 1}/${limit}] ✅ Submitted to Google: ${url}`);
+            console.log(`[${offset + i + 1}/${urls.length}] ✅ Submitted to Google: ${url}`);
           } else {
-            console.log(`[${i + 1}/${limit}] ❌ Failed Google: ${url} (Status: ${res.statusCode})`);
+            console.log(`[${offset + i + 1}/${urls.length}] ❌ Failed Google: ${url} (Status: ${res.statusCode})`);
             if (!global.googleErrorLogged) {
               console.log(`Google API Error details: ${resBody}`);
               global.googleErrorLogged = true;
@@ -181,8 +198,8 @@ function submitToGoogle() {
       await new Promise(resolve => setTimeout(resolve, 200));
     }
     
-    if (urls.length > 200) {
-      console.log(`\n📢 Google daily quota (200) reached. Remaining ${urls.length - 200} URLs can be submitted tomorrow.`);
+    if (offset + limit < urls.length) {
+      console.log(`\n📢 Remaining ${urls.length - (offset + limit)} URLs can be submitted using: node scripts/index-now.js --offset ${offset + limit} --limit 200`);
     }
   });
 }
