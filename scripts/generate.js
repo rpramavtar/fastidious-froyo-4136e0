@@ -912,7 +912,7 @@ exams.forEach(job => {
 
     actionButtons = `
       <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download Admit Card (Server 1)</a>
-      <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Admit Card (Server 2)</a>
+      <a href="https://www.effectivecpmnetwork.com/zadr5xq5j?key=d33919ca92053fbd4192bcefd6e81f5b" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">If Server 1 is slow, Click Here (Server 2)</a>
       <a href="${urls.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Official Website</a>
     `;
   } else if (job.category === "Result") {
@@ -940,7 +940,7 @@ exams.forEach(job => {
 
     actionButtons = `
       <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download Result PDF (Selected List)</a>
-      <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Category Cut-Off Notice</a>
+      <a href="https://www.effectivecpmnetwork.com/zadr5xq5j?key=d33919ca92053fbd4192bcefd6e81f5b" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">If Server 1 is slow, Click Here (Server 2)</a>
       <a href="${urls.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Check Score Card / Marks</a>
     `;
   } else {
@@ -969,7 +969,8 @@ exams.forEach(job => {
 
     actionButtons = `
       <a href="${urls.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Apply Online Link</a>
-      <a href="${urls.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Download Official Notification</a>
+      <a href="https://www.effectivecpmnetwork.com/zadr5xq5j?key=d33919ca92053fbd4192bcefd6e81f5b" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">If Server 1 is slow, Click Here (Server 2)</a>
+      <a href="${urls.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Download Official Notification</a>
       <a href="${urls.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Official Website</a>
     `;
   }
