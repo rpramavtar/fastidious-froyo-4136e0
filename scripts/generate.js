@@ -7,6 +7,8 @@ const dataJsPath = path.join(__dirname, '../assets/js/data.js');
 const sitemapHtmlPath = path.join(__dirname, '../sitemap.html');
 const sitemapXmlPath = path.join(__dirname, '../sitemap.xml');
 const templatePath = path.join(__dirname, 'template.html');
+const indexPath = path.join(__dirname, '../index.html');
+const yojanaHtmlPath = path.join(__dirname, '../yojana.html');
 
 // Ensure jobs directory exists
 if (!fs.existsSync(jobsDir)) {
@@ -1284,6 +1286,157 @@ exams.forEach(job => {
 xmlOutput += `</urlset>`;
 fs.writeFileSync(sitemapXmlPath, xmlOutput, 'utf8');
 console.log(`Successfully generated sitemap.xml with ${exams.length} job entries.`);
+
+// 13b. Pre-render Static Lists in index.html, yojana.html, and sitemap.html for Search Engine Crawlers
+try {
+  const replaceStaticRegion = (content, startComment, endComment, replacement) => {
+    const startIndex = content.indexOf(startComment);
+    const endIndex = content.indexOf(endComment);
+    if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
+      return content;
+    }
+    return content.substring(0, startIndex + startComment.length) + 
+           "\n" + replacement + "\n" + 
+           content.substring(endIndex);
+  };
+
+  // Pre-render index.html
+  if (fs.existsSync(indexPath)) {
+    let indexHtml = fs.readFileSync(indexPath, 'utf8');
+
+    const renderIndexGrid = (cat, limitVal) => exams
+      .filter(item => item.category === cat)
+      .slice(0, limitVal)
+      .map(item => {
+        const showBadge = item.isTrending ? '<span class="badge-new">New</span>' : '';
+        return `        <a href="jobs/${item.id}.html" class="grid-item-link">
+          <span class="grid-item-left">
+            ${showBadge}
+            ${item.shortTitle} Online Form 2026
+          </span>
+          <span class="grid-item-meta">${formatDate(item.postDate)}</span>
+        </a>`;
+      })
+      .join("\n");
+
+    const indexLatest = renderIndexGrid("Latest Jobs", 10);
+    const indexAdmit = renderIndexGrid("Admit Card", 10);
+    const indexResult = renderIndexGrid("Result", 10);
+    const indexAnswerKey = renderIndexGrid("Answer Key", 10);
+    const indexSyllabus = renderIndexGrid("Syllabus", 10);
+
+    const indexYojana = yojanaList
+      .slice(0, 8)
+      .map(y => `        <a href="yojana.html#${y.id}" class="grid-item-link">
+          <span class="grid-item-left">
+            <span class="badge-new" style="background-color: var(--secondary)">Scheme</span>
+            ${y.title}
+          </span>
+          <span class="grid-item-meta">${y.lastUpdate}</span>
+        </a>`)
+      .join("\n");
+
+    const indexCentral = exams
+      .filter(item => ["UPSC", "SSC", "Railway", "Banking", "Central"].includes(item.subCategory))
+      .slice(0, 10)
+      .map(item => {
+        const showBadge = item.isTrending ? '<span class="badge-new">New</span>' : '';
+        return `        <a href="jobs/${item.id}.html" class="grid-item-link">
+          <span class="grid-item-left">
+            ${showBadge}
+            ${item.shortTitle} Online Form 2026
+          </span>
+          <span class="grid-item-meta">${formatDate(item.postDate)}</span>
+        </a>`;
+      })
+      .join("\n");
+
+    const indexState = exams
+      .filter(item => item.subCategory === "State Wise" || item.state !== "All India")
+      .slice(0, 10)
+      .map(item => {
+        const showBadge = item.isTrending ? '<span class="badge-new">New</span>' : '';
+        return `        <a href="jobs/${item.id}.html" class="grid-item-link">
+          <span class="grid-item-left">
+            ${showBadge}
+            ${item.shortTitle} Online Form 2026
+          </span>
+          <span class="grid-item-meta">${formatDate(item.postDate)}</span>
+        </a>`;
+      })
+      .join("\n");
+
+    indexHtml = replaceStaticRegion(indexHtml, '<!-- STATIC_LATEST_JOBS_START -->', '<!-- STATIC_LATEST_JOBS_END -->', indexLatest);
+    indexHtml = replaceStaticRegion(indexHtml, '<!-- STATIC_ADMIT_CARD_START -->', '<!-- STATIC_ADMIT_CARD_END -->', indexAdmit);
+    indexHtml = replaceStaticRegion(indexHtml, '<!-- STATIC_RESULT_START -->', '<!-- STATIC_RESULT_END -->', indexResult);
+    indexHtml = replaceStaticRegion(indexHtml, '<!-- STATIC_ANSWER_KEY_START -->', '<!-- STATIC_ANSWER_KEY_END -->', indexAnswerKey);
+    indexHtml = replaceStaticRegion(indexHtml, '<!-- STATIC_SYLLABUS_START -->', '<!-- STATIC_SYLLABUS_END -->', indexSyllabus);
+    indexHtml = replaceStaticRegion(indexHtml, '<!-- STATIC_YOJANA_START -->', '<!-- STATIC_YOJANA_END -->', indexYojana);
+    indexHtml = replaceStaticRegion(indexHtml, '<!-- STATIC_CENTRAL_START -->', '<!-- STATIC_CENTRAL_END -->', indexCentral);
+    indexHtml = replaceStaticRegion(indexHtml, '<!-- STATIC_STATE_START -->', '<!-- STATIC_STATE_END -->', indexState);
+
+    fs.writeFileSync(indexPath, indexHtml, 'utf8');
+    console.log("Successfully pre-rendered static content lists inside index.html");
+  }
+
+  // Pre-render sitemap.html
+  if (fs.existsSync(sitemapHtmlPath)) {
+    let sitemapHtml = fs.readFileSync(sitemapHtmlPath, 'utf8');
+
+    const renderSitemapList = (cat) => exams
+      .filter(item => item.category === cat)
+      .map(item => `          <li><a href="jobs/${item.id}.html">${item.title}</a></li>`)
+      .join("\n");
+
+    const sitemapLatest = renderSitemapList("Latest Jobs");
+    const sitemapAdmit = renderSitemapList("Admit Card");
+    const sitemapResult = renderSitemapList("Result");
+    const sitemapAnswerKey = renderSitemapList("Answer Key");
+    const sitemapSyllabus = renderSitemapList("Syllabus");
+    const sitemapYojana = yojanaList
+      .map(y => `          <li><a href="yojana.html#${y.id}">${y.title}</a></li>`)
+      .join("\n");
+
+    sitemapHtml = replaceStaticRegion(sitemapHtml, '<!-- STATIC_SITEMAP_LATEST_JOBS_START -->', '<!-- STATIC_SITEMAP_LATEST_JOBS_END -->', sitemapLatest);
+    sitemapHtml = replaceStaticRegion(sitemapHtml, '<!-- STATIC_SITEMAP_ADMIT_CARD_START -->', '<!-- STATIC_SITEMAP_ADMIT_CARD_END -->', sitemapAdmit);
+    sitemapHtml = replaceStaticRegion(sitemapHtml, '<!-- STATIC_SITEMAP_RESULT_START -->', '<!-- STATIC_SITEMAP_RESULT_END -->', sitemapResult);
+    sitemapHtml = replaceStaticRegion(sitemapHtml, '<!-- STATIC_SITEMAP_ANSWER_KEY_START -->', '<!-- STATIC_SITEMAP_ANSWER_KEY_END -->', sitemapAnswerKey);
+    sitemapHtml = replaceStaticRegion(sitemapHtml, '<!-- STATIC_SITEMAP_SYLLABUS_START -->', '<!-- STATIC_SITEMAP_SYLLABUS_END -->', sitemapSyllabus);
+    sitemapHtml = replaceStaticRegion(sitemapHtml, '<!-- STATIC_SITEMAP_YOJANA_START -->', '<!-- STATIC_SITEMAP_YOJANA_END -->', sitemapYojana);
+
+    fs.writeFileSync(sitemapHtmlPath, sitemapHtml, 'utf8');
+    console.log("Successfully pre-rendered static index directory inside sitemap.html");
+  }
+
+  // Pre-render yojana.html
+  if (fs.existsSync(yojanaHtmlPath)) {
+    let yojanaHtml = fs.readFileSync(yojanaHtmlPath, 'utf8');
+
+    const yojanaGridHtml = yojanaList
+      .map(scheme => `      <div class="yojana-card" id="${scheme.id}">
+        <h3 class="yojana-card-title">${scheme.title}</h3>
+        <p class="yojana-card-desc">${scheme.shortDescription}</p>
+        <div class="yojana-meta-list">
+          <div><strong>Benefit:</strong> ${scheme.benefit}</div>
+          <div><strong>Eligibility:</strong> ${scheme.eligibility}</div>
+          <div><strong>Necessary Documents:</strong> ${scheme.documents}</div>
+        </div>
+        <div style="margin-top: auto;">
+          <h4 style="font-size: 14px; margin-bottom: 8px;">How to Apply:</h4>
+          <p style="font-size: 13px; color: var(--text-secondary); white-space: pre-line; margin-bottom: 16px;">${scheme.howToApply}</p>
+          <a href="${scheme.officialLink}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 13px; padding: 8px 16px; width: 100%;">Apply on Official Portal</a>
+        </div>
+      </div>`)
+      .join("\n");
+
+    yojanaHtml = replaceStaticRegion(yojanaHtml, '<!-- STATIC_YOJANA_GRID_START -->', '<!-- STATIC_YOJANA_GRID_END -->', yojanaGridHtml);
+
+    fs.writeFileSync(yojanaHtmlPath, yojanaHtml, 'utf8');
+    console.log("Successfully pre-rendered static welfare schemes inside yojana.html");
+  }
+} catch (preErr) {
+  console.error("Error during static pre-rendering process:", preErr);
+}
 
 // 14. Helper Date Formatter
 function formatDate(dateStr) {
