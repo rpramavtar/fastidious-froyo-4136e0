@@ -6,6 +6,7 @@ const jobsDir = path.join(__dirname, '../jobs');
 const dataJsPath = path.join(__dirname, '../assets/js/data.js');
 const sitemapHtmlPath = path.join(__dirname, '../sitemap.html');
 const sitemapXmlPath = path.join(__dirname, '../sitemap.xml');
+const rssXmlPath = path.join(__dirname, '../rss.xml');
 const templatePath = path.join(__dirname, 'template.html');
 const indexPath = path.join(__dirname, '../index.html');
 const yojanaHtmlPath = path.join(__dirname, '../yojana.html');
@@ -1287,6 +1288,35 @@ exams.forEach(job => {
 xmlOutput += `</urlset>`;
 fs.writeFileSync(sitemapXmlPath, xmlOutput, 'utf8');
 console.log(`Successfully generated sitemap.xml with ${exams.length} job entries.`);
+
+// 13a. Generate RSS Feed (rss.xml) for Google Publisher Center / Google News
+const sortedExamsForRss = [...exams].sort((a, b) => new Date(b.postDate) - new Date(a.postDate)).slice(0, 50);
+let rssOutput = `<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Job Vacancies Alert</title>
+  <link>https://jobvacanciesalert.com/</link>
+  <description>Latest Government Job Alerts, Admit Cards, Results, Answer Keys, and Welfare Schemes.</description>
+  <language>en-us</language>
+  <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+  <atom:link href="https://jobvacanciesalert.com/rss.xml" rel="self" type="application/rss+xml" />
+`;
+
+sortedExamsForRss.forEach(job => {
+  const cleanTitle = job.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const cleanDesc = `Apply Online for ${job.title}. Department: ${job.department}. Get vacancies, age limits, syllabus outline, fees, and guidelines.`.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  rssOutput += `  <item>
+    <title>${cleanTitle}</title>
+    <link>https://jobvacanciesalert.com/jobs/${job.id}.html</link>
+    <description>${cleanDesc}</description>
+    <pubDate>${new Date(job.postDate).toUTCString()}</pubDate>
+    <guid>https://jobvacanciesalert.com/jobs/${job.id}.html</guid>
+  </item>\n`;
+});
+
+rssOutput += `</channel>\n</rss>`;
+fs.writeFileSync(rssXmlPath, rssOutput, 'utf8');
+console.log(`Successfully generated rss.xml with ${sortedExamsForRss.length} entries.`);
 
 // 13b. Pre-render Static Lists in index.html, yojana.html, and sitemap.html for Search Engine Crawlers
 try {
