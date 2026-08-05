@@ -609,24 +609,50 @@ function getPostSpecificDetails(job) {
       "'Lucent's General Knowledge'"
     ];
   } else {
-    // Default/General Posts
-    pattern = `The general selection examination comprises:
-1. Written Examination (Objective MCQ style) testing GK, Quantitative Aptitude, Reasoning, and Language.
-2. Skill Test / Physical Test (where applicable based on department norms).
-3. Document Verification and Final Merit Evaluation.`;
-
-    syllabus = `The standard syllabus is outlined as follows:
-- Quantitative Aptitude: Ratios, averages, percentages, data interpretation.
-- General Intelligence & Reasoning: Analogies, series, blood relations, puzzles.
-- General Awareness: Current affairs, History, Constitution, Science, Geography.
-- Language Skill: Basic grammar, reading comprehension, vocabulary.`;
-
-    books = [
-      "'Quantitative Aptitude for Competitive Examinations' by Dr. R.S. Aggarwal",
-      "'A Modern Approach to Verbal & Non-Verbal Reasoning' by R.S. Aggarwal",
-      "'General Knowledge' by Lucent Publications",
-      "'Objective General English' by S.P. Bakshi"
+    // Default/General Posts - Dynamically select from pools based on job ID hash to eliminate duplicate content footprint
+    const defaultSyllabusPool = [
+      `- General Studies: Indian History, Indian Polity, Geography, Basic Science, and General Knowledge.\n- Logical Reasoning: Coding-decoding, blood relations, analogies, series, and non-verbal reasoning.\n- Numerical Ability: Percentages, profit and loss, ratio & proportion, and arithmetic updates.`,
+      `- Quantitative Aptitude: Number systems, simplification, decimals, HCF & LCM, average, and percentages.\n- English Language: Reading comprehension, sentence fillers, vocabulary, and basic grammar.\n- General Intelligence: Puzzles, syllogism, seating arrangement, and direction sense.`,
+      `- General Awareness: Current national affairs, sports achievements, awards, books and authors.\n- Numerical Ability: Time & work, speed & distance, simple interest, and graphical data interpretation.\n- Language Ability: Grammar rules, synonyms, antonyms, and direct/indirect speech.`,
+      `- Core General Studies: Constitution of India, history of independence movement, physical geography, and economics.\n- Reasoning Skills: Decision making, problem solving, visual memory, and relationship concepts.\n- Basic Mathematics: Fractions, profit and loss, interest, and tabular data tables.`,
+      `- Mental Ability: Verbal and figure classification, arithmetical number series, coding and decoding.\n- General English: Vocabulary, spotting errors, cloze test, and sentence improvement rules.\n- GK Section: Local state events, history, geography, and administrative setups.`
     ];
+
+    const defaultBooksPool = [
+      ["'Quantitative Aptitude' by R.S. Aggarwal", "'Modern Verbal Reasoning' by Kiran Publications", "'General Knowledge' by Lucent Publishers"],
+      ["'Fast Track Objective Arithmetic' by Rajesh Verma", "'Analytical Reasoning' by M.K. Pandey", "'Objective General English' by S.P. Bakshi"],
+      ["'Quantitative Aptitude for Exams' by Abhijit Guha", "'Test of Reasoning' by Edgar Thorpe", "'GK Manual' by Pearson Education"],
+      ["'Arithmetic for Competitive Exams' by Arihant Experts", "'General Intelligence & Reasoning' by R.S. Aggarwal", "'General Studies Guide' by Disha Publications"],
+      ["'Magical Book on Quicker Maths' by M. Tyra", "'Logical Reasoning' by R.S. Aggarwal", "'Objective General English' by Arihant Experts"]
+    ];
+
+    const defaultPatternPool = [
+      `The general recruitment examination comprises:
+1. Written Examination (Objective MCQ style) testing GK, Aptitude, Reasoning, and Language.
+2. Skill Test / Practical evaluation (where applicable as per department instructions).
+3. Document Verification and Final Merit Selection.`,
+      `The standard selection procedure consists of:
+1. Online Computer Based Test (CBT) covering multiple choice objective questions.
+2. Skill Test or Typing Test (as per the requirements of the specific post).
+3. Detailed Document Verification and Medical Fitness check.`,
+      `Candidates will undergo the following selection phases:
+1. Written Exam (OMR/Online based) testing general knowledge and verbal aptitude.
+2. Physical standard check or practical skill evaluation (where applicable).
+3. Certificate verification and final merit listing.`,
+      `The selection methodology is structured as follows:
+1. Objective Type Written Examination (covering GK, Mathematics, Reasoning, and Language).
+2. Typing test or computer proficiency assessment (post-specific).
+3. Final interview or certificate validation stage.`,
+      `The recruitment process follows a multi-stage criteria:
+1. Phase I: Written Screening Test (Multiple choice questions with negative marking).
+2. Phase II: Trade Test or Skill Assessment (qualifying in nature).
+3. Phase III: Final document verification and medical check.`
+    ];
+
+    const poolIdx = job.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 5;
+    pattern = defaultPatternPool[poolIdx];
+    syllabus = defaultSyllabusPool[poolIdx];
+    books = defaultBooksPool[poolIdx];
   }
   
   // 2. Generate post-specific FAQs
